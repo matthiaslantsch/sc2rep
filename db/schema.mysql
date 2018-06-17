@@ -1,0 +1,210 @@
+CREATE TABLE `build` (
+  `idTag` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `idBuildType` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `descBrief` varchar(255) DEFAULT NULL,
+  `descLonger` text,
+  PRIMARY KEY (`idTag`),
+  KEY `fk_build_idBuildType_buildType_idBuildType` (`idBuildType`),
+  KEY `fk_build_idUser_user_idUser` (`idUser`),
+  CONSTRAINT `fk_build_idBuildType_buildType_idBuildType` FOREIGN KEY (`idBuildType`) REFERENCES `buildType` (`idBuildType`),
+  CONSTRAINT `fk_build_idTag_tag_idTag` FOREIGN KEY (`idTag`) REFERENCES `tag` (`idTag`),
+  CONSTRAINT `fk_build_idUser_user_idUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='build-1463122905'
+
+CREATE TABLE `buildType` (
+  `idBuildType` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY (`idBuildType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='buildType-1460100322'
+
+CREATE TABLE `map` (
+  `idTag` int(11) NOT NULL,
+  `identifier` varchar(255) NOT NULL,
+  `sizeX` int(11) DEFAULT NULL,
+  `sizeY` int(11) DEFAULT NULL,
+  `denied` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idTag`),
+  UNIQUE KEY `identifier` (`identifier`),
+  CONSTRAINT `fk_map_idTag_tag_idTag` FOREIGN KEY (`idTag`) REFERENCES `tag` (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='map-1463642099'
+
+CREATE TABLE `match` (
+  `idMatch` int(11) NOT NULL AUTO_INCREMENT,
+  `identifier` varchar(255) NOT NULL,
+  `isLadder` tinyint(1) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `loops` int(11) NOT NULL,
+  `played` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `length` int(11) NOT NULL,
+  PRIMARY KEY (`idMatch`),
+  KEY `fk_match_idStatus_status_idStatus` (`idStatus`),
+  CONSTRAINT `fk_match_idStatus_status_idStatus` FOREIGN KEY (`idStatus`) REFERENCES `status` (`idStatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='match-1460159150'
+
+CREATE TABLE `match2tag` (
+  `idMatch` int(11) NOT NULL,
+  `idTag` int(11) NOT NULL,
+  PRIMARY KEY (`idMatch`,`idTag`),
+  KEY `fk_match2tag_idTag_tag_idTag` (`idTag`),
+  CONSTRAINT `fk_match2tag_idMatch_match_idMatch` FOREIGN KEY (`idMatch`) REFERENCES `match` (`idMatch`),
+  CONSTRAINT `fk_match2tag_idTag_tag_idTag` FOREIGN KEY (`idTag`) REFERENCES `tag` (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='match2tag-1460100421'
+
+CREATE TABLE `performance` (
+  `idPerformance` int(11) NOT NULL AUTO_INCREMENT,
+  `RCR` int(11) DEFAULT NULL,
+  `SQ` int(11) DEFAULT NULL,
+  `AU` int(11) DEFAULT NULL,
+  `APM` int(11) DEFAULT NULL,
+  `isWin` tinyint(1) DEFAULT NULL,
+  `idMatch` int(11) NOT NULL,
+  `idPlayer` int(11) NOT NULL,
+  `pickRace` int(11) NOT NULL,
+  `playRace` int(11) NOT NULL,
+  `team` int(11) NOT NULL,
+  `secondBase` int(11) DEFAULT NULL,
+  `thirdBase` int(11) DEFAULT NULL,
+  `onebaseSat` int(11) DEFAULT NULL,
+  `twobaseSat` int(11) DEFAULT NULL,
+  `threebaseSat` int(11) DEFAULT NULL,
+  `workerCount` int(11) DEFAULT NULL,
+  `sid` int(11) NOT NULL,
+  `divisionRank` varchar(20) DEFAULT NULL,
+  `leagueRank` varchar(20) DEFAULT NULL,
+  `serverRank` varchar(20) DEFAULT NULL,
+  `globalRank` varchar(20) DEFAULT NULL,
+  `league` int(11) DEFAULT NULL,
+  `points` int(11) DEFAULT NULL,
+  `winrate` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idPerformance`),
+  KEY `fk_performance_idMatch_match_idMatch` (`idMatch`),
+  KEY `fk_performance_idPlayer_player_idPlayer` (`idPlayer`),
+  KEY `fk_performance_pickRace_race_idTag` (`pickRace`),
+  KEY `fk_performance_playRace_race_idTag` (`playRace`),
+  KEY `fk_performance_league_tag_idTag` (`league`),
+  CONSTRAINT `fk_performance_idMatch_match_idMatch` FOREIGN KEY (`idMatch`) REFERENCES `match` (`idMatch`),
+  CONSTRAINT `fk_performance_idPlayer_player_idPlayer` FOREIGN KEY (`idPlayer`) REFERENCES `player` (`idPlayer`),
+  CONSTRAINT `fk_performance_league_tag_idTag` FOREIGN KEY (`league`) REFERENCES `tag` (`idTag`),
+  CONSTRAINT `fk_performance_pickRace_race_idTag` FOREIGN KEY (`pickRace`) REFERENCES `race` (`idTag`),
+  CONSTRAINT `fk_performance_playRace_race_idTag` FOREIGN KEY (`playRace`) REFERENCES `race` (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='performance-1462186172'
+
+CREATE TABLE `permission` (
+  `idPermission` int(11) NOT NULL AUTO_INCREMENT,
+  `permission` varchar(40) NOT NULL,
+  PRIMARY KEY (`idPermission`),
+  UNIQUE KEY `permission` (`permission`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='permission-1449494964'
+
+CREATE TABLE `permission2user` (
+  `idPermission` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  PRIMARY KEY (`idPermission`,`idUser`),
+  KEY `fk_permission2user_idUser_user_idUser` (`idUser`),
+  CONSTRAINT `fk_permission2user_idPermission_permission_idPermission` FOREIGN KEY (`idPermission`) REFERENCES `permission` (`idPermission`),
+  CONSTRAINT `fk_permission2user_idUser_user_idUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='permission2user-1449494965'
+
+CREATE TABLE `permission2userGroup` (
+  `idPermission` int(11) NOT NULL,
+  `idUserGroup` int(11) NOT NULL,
+  PRIMARY KEY (`idPermission`,`idUserGroup`),
+  KEY `fk_permission2userGroup_idUserGroup_userGroup_idUserGroup` (`idUserGroup`),
+  CONSTRAINT `fk_permission2userGroup_idPermission_permission_idPermission` FOREIGN KEY (`idPermission`) REFERENCES `permission` (`idPermission`),
+  CONSTRAINT `fk_permission2userGroup_idUserGroup_userGroup_idUserGroup` FOREIGN KEY (`idUserGroup`) REFERENCES `userGroup` (`idUserGroup`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='permission2userGroup-1449494967'
+
+CREATE TABLE `player` (
+  `idPlayer` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `clantag` varchar(10) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `bnet` varchar(10) NOT NULL,
+  `portrait` varchar(255) DEFAULT NULL,
+  `curLeague` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`idPlayer`),
+  KEY `fk_player_idUser_user_idUser` (`idUser`),
+  CONSTRAINT `fk_player_idUser_user_idUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='player-1462802284'
+
+CREATE TABLE `race` (
+  `idTag` int(11) NOT NULL,
+  `isPlayable` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idTag`),
+  CONSTRAINT `fk_race_idTag_tag_idTag` FOREIGN KEY (`idTag`) REFERENCES `tag` (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='race-1460100324'
+
+CREATE TABLE `season` (
+  `idTag` int(11) NOT NULL,
+  `start` datetime NOT NULL,
+  `lock` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `number` int(11) NOT NULL,
+  PRIMARY KEY (`idTag`),
+  CONSTRAINT `fk_season_idTag_tag_idTag` FOREIGN KEY (`idTag`) REFERENCES `tag` (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='season-1460100325'
+
+CREATE TABLE `status` (
+  `idStatus` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  PRIMARY KEY (`idStatus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='status-1460100321'
+
+CREATE TABLE `step` (
+  `idStep` int(11) NOT NULL AUTO_INCREMENT,
+  `supply` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `order` int(11) NOT NULL,
+  `asset` varchar(40) NOT NULL,
+  `descBrief` varchar(40) DEFAULT NULL,
+  `descLonger` varchar(255) DEFAULT NULL,
+  `chrono` tinyint(1) NOT NULL,
+  `idBuild` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`idStep`),
+  KEY `fk_step_idBuild_build_idTag` (`idBuild`),
+  KEY `fk_step_type_stepType_idStepType` (`type`),
+  CONSTRAINT `fk_step_idBuild_build_idTag` FOREIGN KEY (`idBuild`) REFERENCES `build` (`idTag`),
+  CONSTRAINT `fk_step_type_stepType_idStepType` FOREIGN KEY (`type`) REFERENCES `stepType` (`idStepType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='step-1463119797'
+
+CREATE TABLE `stepType` (
+  `idStepType` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  PRIMARY KEY (`idStepType`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='stepType-1463119795'
+
+CREATE TABLE `tag` (
+  `idTag` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `group` varchar(40) NOT NULL,
+  PRIMARY KEY (`idTag`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tag-1460100310'
+
+CREATE TABLE `user` (
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `authHash` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idUser`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='user-1449494962'
+
+CREATE TABLE `user2userGroup` (
+  `idUser` int(11) NOT NULL,
+  `idUserGroup` int(11) NOT NULL,
+  PRIMARY KEY (`idUser`,`idUserGroup`),
+  KEY `fk_user2userGroup_idUserGroup_userGroup_idUserGroup` (`idUserGroup`),
+  CONSTRAINT `fk_user2userGroup_idUserGroup_userGroup_idUserGroup` FOREIGN KEY (`idUserGroup`) REFERENCES `userGroup` (`idUserGroup`),
+  CONSTRAINT `fk_user2userGroup_idUser_user_idUser` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='user2userGroup-1449494966'
+
+CREATE TABLE `userGroup` (
+  `idUserGroup` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY (`idUserGroup`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='userGroup-1449494963'

@@ -1,0 +1,1048 @@
+{
+    "Adept": {
+        "name": "Adept",
+        "time": 27,
+        "type": "army"
+    },
+    "Archon": {
+        "name": "Archon",
+        "time": 9,
+        "type": "morph-army"
+    },
+    "Armory": {
+        "name": "Armory",
+        "time": 47,
+        "type": "struct"
+    },
+    "Assimilator": {
+        "name": "Assimilator",
+        "time": 22,
+        "type": "struct"
+    },
+    "Baneling": {
+        "name": "Baneling",
+        "time": 14,
+        "type": "army"
+    },
+    "BanelingNest": {
+        "name": "BanelingNest",
+        "time": 43,
+        "type": "struct"
+    },
+    "Banshee": {
+        "name": "Banshee",
+        "time": 43,
+        "type": "army"
+    },
+    "BansheeCloak": {
+        "name": "BansheeCloak",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "Barracks": {
+        "name": "Barracks",
+        "time": 47,
+        "type": "struct"
+    },
+    "BarracksReactor": {
+        "name": "BarracksReactor",
+        "time": 36,
+        "type": "struct",
+        "canMorph": "FactoryReactor,StarportReactor,BarracksReactor"
+    },
+    "BarracksTechLab": {
+        "name": "BarracksTechLab",
+        "time": 18,
+        "type": "struct",
+        "canMorph": "FactoryTechLab,StarportTechLab,BarracksTechLab"
+    },
+    "Battlecruiser": {
+        "name": "Battlecruiser",
+        "time": 65,
+        "type": "army"
+    },
+    "BattlecruiserBehemothReactor": {
+        "name": "BattlecruiserBehemothReactor",
+        "time": 57,
+        "type": "upgrade"
+    },
+    "BattlecruiserEnableSpecializations": {
+        "name": "BattlecruiserEnableSpecializations",
+        "time": 43,
+        "type": "upgrade"
+    },
+    "BlinkTech": {
+        "name": "BlinkTech",
+        "time": 170,
+        "type": "upgrade"
+    },
+    "BroodLord": {
+        "name": "BroodLord",
+        "time": 25,
+        "type": "army"
+    },
+    "Bunker": {
+        "name": "Bunker",
+        "time": 29,
+        "type": "struct"
+    },
+    "Burrow": {
+        "name": "Burrow",
+        "time": 71,
+        "type": "upgrade"
+    },
+    "Carrier": {
+        "name": "Carrier",
+        "time": 86,
+        "type": "army"
+    },
+    "CarrierLaunchSpeedUpgrade": {
+        "name": "CarrierLaunchSpeedUpgrade",
+        "time": 80,
+        "type": "upgrade"
+    },
+    "CentrificalHooks": {
+        "name": "CentrificalHooks",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "Charge": {
+        "name": "Charge",
+        "time": 100,
+        "type": "upgrade"
+    },
+    "ChitinousPlating": {
+        "name": "ChitinousPlating",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "Colossus": {
+        "name": "Colossus",
+        "time": 54,
+        "type": "army"
+    },
+    "CommandCenter": {
+        "name": "CommandCenter",
+        "time": 72,
+        "type": "struct",
+        "canMorph": "OrbitalCommand,PlanetaryFortress"
+    },
+    "Corruptor": {
+        "name": "Corruptor",
+        "time": 29,
+        "type": "army"
+    },
+    "CyberneticsCore": {
+        "name": "CyberneticsCore",
+        "time": 36,
+        "type": "struct"
+    },
+    "Cyclone": {
+        "name": "Cyclone",
+        "time": 32,
+        "type": "army"
+    },
+    "DarkShrine": {
+        "name": "DarkShrine",
+        "time": 72,
+        "type": "struct"
+    },
+    "DarkTemplar": {
+        "name": "DarkTemplar",
+        "time": 40,
+        "type": "army",
+        "canMorph": "Archon"
+    },
+    "Disruptor": {
+        "name": "Disruptor",
+        "time": 36,
+        "type": "army"
+    },
+    "Drone": {
+        "name": "Drone",
+        "time": 12,
+        "type": "worker"
+    },
+    "DurableMaterials": {
+        "name": "DurableMaterials",
+        "time": 110,
+        "type": "upgrade"
+    },
+    "EngineeringBay": {
+        "name": "EngineeringBay",
+        "time": 25,
+        "type": "struct"
+    },
+    "EvolutionChamber": {
+        "name": "EvolutionChamber",
+        "time": 25,
+        "type": "struct"
+    },
+    "ExtendedThermalLance": {
+        "name": "ExtendedThermalLance",
+        "time": 100,
+        "type": "upgrade"
+    },
+    "Extractor": {
+        "name": "Extractor",
+        "time": 22,
+        "type": "struct"
+    },
+    "Factory": {
+        "name": "Factory",
+        "time": 43,
+        "type": "struct"
+    },
+    "FactoryReactor": {
+        "name": "FactoryReactor",
+        "time": 36,
+        "type": "struct",
+        "canMorph": "FactoryReactor,StarportReactor,BarracksReactor"
+    },
+    "FactoryTechLab": {
+        "name": "FactoryTechLab",
+        "time": 18,
+        "type": "struct",
+        "canMorph": "FactoryTechLab,StarportTechLab,BarracksTechLab"
+    },
+    "FleetBeacon": {
+        "name": "FleetBeacon",
+        "time": 43,
+        "type": "struct"
+    },
+    "Forge": {
+        "name": "Forge",
+        "time": 33,
+        "type": "struct"
+    },
+    "FusionCore": {
+        "name": "FusionCore",
+        "time": 47,
+        "type": "struct"
+    },
+    "Gateway": {
+        "name": "Gateway",
+        "time": 47,
+        "type": "struct",
+        "canMorph": "WarpGate"
+    },
+    "Ghost": {
+        "name": "Ghost",
+        "time": 29,
+        "type": "army"
+    },
+    "GhostAcademy": {
+        "name": "GhostAcademy",
+        "time": 29,
+        "type": "struct"
+    },
+    "GhostMoebiusReactor": {
+        "name": "GhostMoebiusReactor",
+        "time": 80,
+        "type": "upgrade"
+    },
+    "GlialReconstitution": {
+        "name": "GlialReconstitution",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "GraviticDrive": {
+        "name": "GraviticDrive",
+        "time": 57,
+        "type": "upgrade"
+    },
+    "GreaterSpire": {
+        "name": "GreaterSpire",
+        "time": 72,
+        "type": "morph-struct"
+    },
+    "haltech": {
+        "_comment": "whatIsThis",
+        "name": "haltech",
+        "time": 0,
+        "type": "upgrade"
+    },
+    "Hatchery": {
+        "name": "Hatchery",
+        "time": 72,
+        "type": "struct",
+        "canMorph": "Lair"
+    },
+    "Hellion": {
+        "name": "Hellion",
+        "time": 22,
+        "type": "army",
+        "canMorph": "BattleHellion"
+    },
+    "BattleHellion": {
+        "name": "HellionTank",
+        "time": 21,
+        "type": "morph-army"
+    },
+    "HighCapacityBarrels": {
+        "_comment": "Liberator upgrade?!?!?!?!?",
+        "name": "HighCapacityBarrels",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "HighTemplar": {
+        "name": "HighTemplar",
+        "time": 22,
+        "type": "army",
+        "canMorph": "Archon"
+    },
+    "HiSecAutoTracking": {
+        "name": "HiSecAutoTracking",
+        "time": 57,
+        "type": "upgrade"
+    },
+    "Hive": {
+        "name": "Hive",
+        "time": 72,
+        "type": "morph-struct"
+    },
+    "Hydralisk": {
+        "name": "Hydralisk",
+        "time": 24,
+        "type": "army",
+        "canMorph": "LurkerMP"
+    },
+    "HydraliskDen": {
+        "name": "HydraliskDen",
+        "time": 29,
+        "type": "struct",
+        "canMorph": "LurkerDenMP"
+    },
+    "hydraliskspeed": {
+        "name": "hydraliskspeed",
+        "time": 71,
+        "type": "upgrade"
+    },
+    "HydraliskSpeedUpgrade": {
+        "name": "HydraliskSpeedUpgrade",
+        "time": 71,
+        "type": "upgrade"
+    },
+    "Immortal": {
+        "name": "Immortal",
+        "time": 40,
+        "type": "army"
+    },
+    "InfestationPit": {
+        "name": "InfestationPit",
+        "time": 36,
+        "type": "struct"
+    },
+    "Infestor": {
+        "name": "Infestor",
+        "time": 36,
+        "type": "army"
+    },
+    "InfestorEnergyUpgrade": {
+        "name": "InfestorEnergyUpgrade",
+        "time": 57,
+        "type": "upgrade"
+    },
+    "Lair": {
+        "name": "Lair",
+        "time": 58,
+        "type": "morph-struct",
+        "canMorph": "Hive"
+    },
+    "Liberator": {
+        "name": "Liberator",
+        "time": 43,
+        "type": "army"
+    },
+    "LocustLifetimeIncrease": {
+        "name": "LocustLifetimeIncrease",
+        "time": 120,
+        "type": "upgrade"
+    },
+    "LurkerDenMP": {
+        "name": "LurkerDen",
+        "time": 86,
+        "type": "morph-struct"
+    },
+    "LurkerMP": {
+        "name": "Lurker",
+        "time": 18,
+        "type": "morph-army"
+    },
+    "Marauder": {
+        "name": "Marauder",
+        "time": 22,
+        "type": "army"
+    },
+    "Marine": {
+        "name": "Marine",
+        "time": 18,
+        "type": "army"
+    },
+    "Medivac": {
+        "name": "Medivac",
+        "time": 30,
+        "type": "army"
+    },
+    "MedivacCaduceusReactor": {
+        "name": "MedivacCaduceusReactor",
+        "time": 80,
+        "type": "upgrade"
+    },
+    "MissileTurret": {
+        "name": "MissileTurret",
+        "time": 18,
+        "type": "struct"
+    },
+    "Mothership": {
+        "name": "Mothership",
+        "time": 116,
+        "type": "morph-army"
+    },
+    "MothershipCore": {
+        "name": "MothershipCore",
+        "time": 22,
+        "type": "army",
+        "canMorph": "Mothership"
+    },
+    "Mutalisk": {
+        "name": "Mutalisk",
+        "time": 24,
+        "type": "army"
+    },
+    "NeosteelFrame": {
+        "name": "NeosteelFrame",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "NeuralParasite": {
+        "name": "NeuralParasite",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "Nexus": {
+        "name": "Nexus",
+        "time": 72,
+        "type": "struct"
+    },
+    "NydusNetwork": {
+        "name": "NydusNetwork",
+        "time": 36,
+        "type": "struct"
+    },
+    "Observer": {
+        "name": "Observer",
+        "time": 22,
+        "type": "army"
+    },
+    "ObserverGraviticBooster": {
+        "name": "ObserverGraviticBooster",
+        "time": 57,
+        "type": "upgrade"
+    },
+    "Oracle": {
+        "name": "Oracle",
+        "time": 43,
+        "type": "army"
+    },
+    "OrbitalCommand": {
+        "name": "OrbitalCommand",
+        "time": 25,
+        "type": "morph-struct"
+    },
+    "Overlord": {
+        "name": "Overlord",
+        "time": 18,
+        "type": "army",
+        "canMorph": "Overseer"
+    },
+    "overlordspeed": {
+        "name": "overlordspeed",
+        "time": 43,
+        "type": "upgrade"
+    },
+    "overlordtransport": {
+        "name": "overlordtransport",
+        "time": 0,
+        "type": "upgrade"
+    },
+    "Overseer": {
+        "name": "Overseer",
+        "time": 12,
+        "type": "morph-army"
+    },
+    "PersonalCloaking": {
+        "name": "PersonalCloaking",
+        "time": 86,
+        "type": "upgrade"
+    },
+    "Phoenix": {
+        "name": "Phoenix",
+        "time": 25,
+        "type": "army"
+    },
+    "PhotonCannon": {
+        "name": "PhotonCannon",
+        "time": 29,
+        "type": "struct"
+    },
+    "PlanetaryFortress": {
+        "name": "PlanetaryFortress",
+        "time": 36,
+        "type": "morph-struct"
+    },
+    "Probe": {
+        "name": "Probe",
+        "time": 12,
+        "type": "worker"
+    },
+    "ProtossAirArmorsLevel1": {
+        "name": "ProtossAirArmors",
+        "time": 114,
+        "level": 1,
+        "type": "upgrade"
+    },
+    "ProtossAirArmorsLevel2": {
+        "name": "ProtossAirArmors",
+        "time": 136,
+        "level": 2,
+        "type": "upgrade"
+    },
+    "ProtossAirArmorsLevel3": {
+        "name": "ProtossAirArmors",
+        "time": 157,
+        "level": 3,
+        "type": "upgrade"
+    },
+    "ProtossAirWeaponsLevel1": {
+        "name": "ProtossAirWeapons",
+        "time": 114,
+        "level": 1,
+        "type": "upgrade"
+    },
+    "ProtossAirWeaponsLevel2": {
+        "name": "ProtossAirWeapons",
+        "time": 136,
+        "level": 2,
+        "type": "upgrade"
+    },
+    "ProtossAirWeaponsLevel3": {
+        "name": "ProtossAirWeapons",
+        "time": 157,
+        "level": 3,
+        "type": "upgrade"
+    },
+    "ProtossGroundArmorsLevel1": {
+        "name": "ProtossGroundArmors",
+        "time": 114,
+        "level": 1,
+        "type": "upgrade"
+    },
+    "ProtossGroundArmorsLevel2": {
+        "name": "ProtossGroundArmors",
+        "time": 136,
+        "level": 2,
+        "type": "upgrade"
+    },
+    "ProtossGroundArmorsLevel3": {
+        "name": "ProtossGroundArmors",
+        "time": 157,
+        "level": 3,
+        "type": "upgrade"
+    },
+    "ProtossGroundWeaponsLevel1": {
+        "name": "ProtossGroundWeapons",
+        "time": 114,
+        "level": 1,
+        "type": "upgrade"
+    },
+    "ProtossGroundWeaponsLevel2": {
+        "name": "ProtossGroundWeapons",
+        "time": 136,
+        "level": 2,
+        "type": "upgrade"
+    },
+    "ProtossGroundWeaponsLevel3": {
+        "name": "ProtossGroundWeapons",
+        "time": 157,
+        "level": 3,
+        "type": "upgrade"
+    },
+    "ProtossShieldsLevel1": {
+        "name": "ProtossShields",
+        "time": 114,
+        "level": 1,
+        "type": "upgrade"
+    },
+    "ProtossShieldsLevel2": {
+        "name": "ProtossShields",
+        "time": 136,
+        "level": 2,
+        "type": "upgrade"
+    },
+    "ProtossShieldsLevel3": {
+        "name": "ProtossShields",
+        "time": 157,
+        "level": 3,
+        "type": "upgrade"
+    },
+    "PsiStormTech": {
+        "name": "PsiStormTech",
+        "time": 121,
+        "type": "upgrade"
+    },
+    "PunisherGrenades": {
+        "name": "PunisherGrenades",
+        "time": 43,
+        "type": "upgrade"
+    },
+    "Pylon": {
+        "name": "Pylon",
+        "time": 18,
+        "type": "struct"
+    },
+    "Queen": {
+        "name": "Queen",
+        "time": 36,
+        "type": "army"
+    },
+    "Ravager": {
+        "name": "Ravager",
+        "time": 9,
+        "type": "morph-army"
+    },
+    "Raven": {
+        "name": "Raven",
+        "time": 43,
+        "type": "army"
+    },
+    "RavenCorvidReactor": {
+        "name": "RavenCorvidReactor",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "Reaper": {
+        "name": "Reaper",
+        "time": 33,
+        "type": "army"
+    },
+    "ReaperSpeed": {
+        "name": "ReaperSpeed",
+        "time": 0,
+        "type": "upgrade"
+    },
+    "Refinery": {
+        "name": "Refinery",
+        "time": 22,
+        "type": "struct"
+    },
+    "Roach": {
+        "name": "Roach",
+        "time": 20,
+        "type": "army",
+        "canMorph": "Ravager"
+    },
+    "RoachWarren": {
+        "name": "RoachWarren",
+        "time": 40,
+        "type": "struct"
+    },
+    "RoboticsBay": {
+        "name": "RoboticsBay",
+        "time": 47,
+        "type": "struct"
+    },
+    "RoboticsFacility": {
+        "name": "RoboticsFacility",
+        "time": 47,
+        "type": "struct"
+    },
+    "SCV": {
+        "name": "SCV",
+        "time": 12,
+        "type": "worker"
+    },
+    "SensorTower": {
+        "name": "SensorTower",
+        "time": 18,
+        "type": "struct"
+    },
+    "Sentry": {
+        "name": "Sentry",
+        "time": 15,
+        "type": "army"
+    },
+    "ShieldWall": {
+        "name": "ShieldWall",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "SiegeTank": {
+        "name": "SiegeTank",
+        "time": 33,
+        "type": "army"
+    },
+    "SpawningPool": {
+        "name": "SpawningPool",
+        "time": 47,
+        "type": "struct"
+    },
+    "SpineCrawler": {
+        "name": "SpineCrawler",
+        "time": 36,
+        "type": "struct"
+    },
+    "Spire": {
+        "name": "Spire",
+        "time": 72,
+        "type": "struct",
+        "canMorph": "GreaterSpire"
+    },
+    "SporeCrawler": {
+        "name": "SporeCrawler",
+        "time": 22,
+        "type": "struct"
+    },
+    "Stalker": {
+        "name": "Stalker",
+        "time": 15,
+        "type": "army"
+    },
+    "Stargate": {
+        "name": "Stargate",
+        "time": 43,
+        "type": "struct"
+    },
+    "Starport": {
+        "name": "Starport",
+        "time": 36,
+        "type": "struct"
+    },
+    "StarportReactor": {
+        "name": "StarportReactor",
+        "time": 36,
+        "type": "struct",
+        "canMorph": "FactoryReactor,StarportReactor,BarracksReactor"
+    },
+    "StarportTechLab": {
+        "name": "StarportTechLab",
+        "time": 18,
+        "type": "struct",
+        "canMorph": "FactoryTechLab,StarportTechLab,BarracksTechLab"
+    },
+    "Stimpack": {
+        "name": "Stimpack",
+        "time": 121,
+        "type": "upgrade"
+    },
+    "SupplyDepot": {
+        "name": "SupplyDepot",
+        "time": 22,
+        "type": "struct"
+    },
+    "SwarmHostMP": {
+        "name": "SwarmHost",
+        "time": 29,
+        "type": "army"
+    },
+    "Tempest": {
+        "name": "Tempest",
+        "time": 54,
+        "type": "army"
+    },
+    "TempestRangeUpgrade": {
+        "name": "TempestRangeUpgrade",
+        "time": 0,
+        "type": "upgrade"
+    },
+    "TemplarArchive": {
+        "name": "TemplarArchive",
+        "time": 36,
+        "type": "struct"
+    },
+    "TerranBuildingArmor": {
+        "name": "TerranBuildingArmor",
+        "time": 100,
+        "type": "upgrade"
+    },
+    "TerranInfantryArmorsLevel1": {
+        "name": "TerranInfantryArmors",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranInfantryArmorsLevel2": {
+        "name": "TerranInfantryArmors",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranInfantryArmorsLevel3": {
+        "name": "TerranInfantryArmors",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "TerranInfantryWeaponsLevel1": {
+        "name": "TerranInfantryWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranInfantryWeaponsLevel2": {
+        "name": "TerranInfantryWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranInfantryWeaponsLevel3": {
+        "name": "TerranInfantryWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "TerranShipWeaponsLevel1": {
+        "name": "TerranShipWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranShipWeaponsLevel2": {
+        "name": "TerranShipWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranShipWeaponsLevel3": {
+        "name": "TerranShipWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "TerranShipArmorsLevel1": {
+        "name": "TerranShipArmors",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranShipArmorsLevel2": {
+        "name": "TerranShipArmors",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranShipArmorsLevel3": {
+        "name": "TerranShipArmors",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "TerranVehicleWeaponsLevel1": {
+        "name": "TerranVehicleWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranVehicleWeaponsLevel2": {
+        "name": "TerranVehicleWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranVehicleWeaponsLevel3": {
+        "name": "TerranVehicleWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "TerranVehicleArmorsLevel1": {
+        "name": "TerranVehicleArmors",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "TerranVehicleArmorsLevel2": {
+        "name": "TerranVehicleArmors",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "TerranVehicleArmorsLevel3": {
+        "name": "TerranVehicleArmors",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "Thor": {
+        "name": "Thor",
+        "time": 43,
+        "type": "army"
+    },
+    "TunnelingClaws": {
+        "name": "TunnelingClaws",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "TwilightCouncil": {
+        "name": "TwilightCouncil",
+        "time": 36,
+        "type": "struct"
+    },
+    "Ultralisk": {
+        "name": "Ultralisk",
+        "time": 40,
+        "type": "army"
+    },
+    "UltraliskCavern": {
+        "name": "UltraliskCavern",
+        "time": 47,
+        "type": "struct"
+    },
+    "Viking": {
+        "name": "VikingFighter",
+        "time": 30,
+        "type": "army"
+    },
+    "Viper": {
+        "name": "Viper",
+        "time": 29,
+        "type": "army"
+    },
+    "VoidRay": {
+        "name": "VoidRay",
+        "time": 43,
+        "type": "army"
+    },
+    "WarpGate": {
+        "name": "WarpGate",
+        "time": 7,
+        "type": "morph-struct"
+    },
+    "WarpGateResearch": {
+        "name": "WarpGateResearch",
+        "time": 114,
+        "type": "upgrade"
+    },
+    "WarpPrism": {
+        "name": "WarpPrism",
+        "time": 36,
+        "type": "army"
+    },
+    "WidowMine": {
+        "name": "WidowMine",
+        "time": 29,
+        "type": "army"
+    },
+    "Zealot": {
+        "name": "Zealot",
+        "time": 28,
+        "type": "army"
+    },
+    "ZergFlyerWeaponsLevel1": {
+        "name": "ZergFlyerWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "ZergFlyerWeaponsLevel2": {
+        "name": "ZergFlyerWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "ZergFlyerWeaponsLevel3": {
+        "name": "ZergFlyerWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "ZergFlyerArmorsLevel1": {
+        "name": "ZergFlyerArmors",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "ZergFlyerArmorsLevel2": {
+        "name": "ZergFlyerArmors",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "ZergFlyerArmorsLevel3": {
+        "name": "ZergFlyerArmors",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "ZergGroundArmorsLevel1": {
+        "name": "ZergGroundArmors",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "ZergGroundArmorsLevel2": {
+        "name": "ZergGroundArmors",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "ZergGroundArmorsLevel3": {
+        "name": "ZergGroundArmors",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "Zergling": {
+        "name": "Zergling",
+        "time": 17,
+        "type": "army"
+    },
+    "zerglingattackspeed": {
+        "_comment": "adrenal glands",
+        "name": "zerglingattackspeed",
+        "time": 93,
+        "type": "upgrade"
+    },
+    "zerglingmovementspeed": {
+        "_comment": "metabolic boost",
+        "name": "zerglingmovementspeed",
+        "time": 79,
+        "type": "upgrade"
+    },
+    "ZergMeleeWeaponsLevel1": {
+        "name": "ZergMeleeWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "ZergMeleeWeaponsLevel2": {
+        "name": "ZergMeleeWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "ZergMeleeWeaponsLevel3": {
+        "name": "ZergMeleeWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    },
+    "ZergMissileWeaponsLevel1": {
+        "name": "ZergMissileWeapons",
+        "time": 114,
+        "type": "upgrade",
+        "level": 1
+    },
+    "ZergMissileWeaponsLevel2": {
+        "name": "ZergMissileWeapons",
+        "time": 136,
+        "type": "upgrade",
+        "level": 2
+    },
+    "ZergMissileWeaponsLevel3": {
+        "name": "ZergMissileWeapons",
+        "time": 157,
+        "type": "upgrade",
+        "level": 3
+    }
+}

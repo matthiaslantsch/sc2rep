@@ -1,37 +1,40 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+* This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
- * class file for the Status model
+ * Model class for the StatusModel model class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\models;
+namespace holonet\sc2rep\models;
 
-use HIS5\lib\activerecord as ar;
+use holonet\activerecord\ModelBase;
 
 /**
- * status model class
- * 
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\sc2rep\models
+ * StatusModel to wrap around the status table
+ *
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\models
  */
-class StatusModel extends ar\ModelBase {
+class StatusModel extends ModelBase {
 
 	/**
-	 * property containing hasMany relationship mappings
+	 * contains relationship mapping for hasMany
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $hasMany Array with definitions for a has many relationship
 	 */
-	public static $hasMany = ["matches"];
-	
+	public static $hasMany = array("matches");
+
 	/**
 	 * property containing verification data for some of the columns
 	 *
-	 * @access 	public
-	 * @var 	array with verification data
+	 * @access public
+	 * @var    array $validate Array with verification data
 	 */
 	public static $validate = array(
 		"name" => ["presence"]

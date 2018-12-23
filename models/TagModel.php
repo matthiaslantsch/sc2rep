@@ -1,62 +1,65 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+* This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
- * class file for the Tag model
+ * Model class for the TagModel model class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\models;
+namespace holonet\sc2rep\models;
 
-use HIS5\lib\activerecord as ar;
+use holonet\activerecord\ModelBase;
 
 /**
- * tag model class
- * 
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\sc2rep\models
+ * TagModel to wrap around the tag table
+ *
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\models
  */
-class TagModel extends ar\ModelBase {
+class TagModel extends ModelBase {
 
 	/**
-	 * property containing hasMany relationship mappings
+	 * contains relationship mapping for hasOne
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $hasOne Array with definitions for a has one relationship
 	 */
-	public static $hasOne = [
-		"build" => ["forced" => false],
-		"race" => ["forced" => false],
-		"season" => ["forced" => false],
-		"map" => ["forced" => false]
-	];
+	public static $hasOne = array(
+		"race" => array("forced" => false),
+		"season" => array("forced" => false),
+		"map" => array("forced" => false)
+	);
 
 	/**
-	 * property containing belongsTo relationship mappings
+	 * property containing many2many relationship mappings
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $many2many Array with relationship mappings
 	 */
-	public static $many2many = ["matches"];
-	
+	public static $many2many = array("matches");
+
 	/**
 	 * property containing verification data for some of the columns
 	 *
-	 * @access 	public
-	 * @var 	array with verification data
+	 * @access public
+	 * @var    array $validate Array with verification data
 	 */
 	public static $validate = array(
-		"name" => ["presence", "length" => ["max" => 255]],
-		"group" => ["presence", "length" => ["max" => 40]]
+		"name" => array("presence", "length" => array("max" => 255)),
+		"group" => array("presence", "length" => array("max" => 255))
 	);
 
 	/**
 	 * helper method either creating a new tag or returning the existing one
 	 *
 	 * @access public
-	 * @param  string name of the tag
-	 * @param  string name of the tag group (optional)
+	 * @param  string $name of the tag
+	 * @param  string $name of the tag group (optional)
+	 * @return instance of this class either newly created or existing
 	 */
 	public static function findOrCreateTag($name, $group = "") {
 		$opts = ["name" => $name];
@@ -72,7 +75,7 @@ class TagModel extends ar\ModelBase {
 		return static::create([
 			"name" => $name,
 			"group" => ($group !== "" ? $group : "other")
-		]);
+		], true);
 	}
 
 	/**

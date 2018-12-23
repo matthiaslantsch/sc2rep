@@ -1,0 +1,224 @@
+/* Deault project css file */
+#mainContainer {
+	margin-top: 50px;
+}
+
+.alertArea > .alert {
+	padding: 13px !important;
+	margin-top: 1px;
+}
+
+.navbar-center {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	text-align: center;
+	margin: auto;
+	height: 100%;
+	z-index: -1;
+	padding-left: 35%;
+	padding-right: 35%;
+	padding-bottom: 1%;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.modalContent {
+	min-width: 100%;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.tag {
+	margin: 5px;
+	padding: 2px 4px;
+	color: #333333;
+	white-space: nowrap;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+}
+
+.dataColumn {
+	text-align: center;
+}
+
+.dataColumn a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.threeChart {
+	height: 200px;
+}
+
+.twoChart {
+	height: 300px;
+}
+
+.oldchart {
+	height: 300px;
+}
+
+.right {
+	text-align: right;
+}
+
+#statsBar {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	padding-left: 5%;
+	padding-right: 5%;
+	box-shadow: inset 0px 0px 6px rgba(0,0,0,0.2);
+	border-top: 1px white solid;
+	border-bottom: 1px white solid;
+}
+
+#timeField {
+	margin-right: 40%;
+	margin-left: 40%;
+	width: 20%;
+	text-align: center;
+}
+
+.playerRow {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.statsRow {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.topBorder {
+	border-top: 1px solid #ddd;
+}
+
+.bottomBorder {
+	border-bottom: 1px solid #ddd;
+}
+
+.dataRow {
+	vertical-align: middle !important;
+	resize: none;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.imgRow img {
+	height: 48px;
+	width: 48px;
+}
+
+.popover {
+	max-width: 100%;
+}
+
+input {
+	min-width: 100%;
+}
+
+.filter-off {
+	opacity: 0.5;
+}
+
+.filter.filter-off:hover {
+	opacity: 1;
+}
+
+.filter.filter-on:hover {
+	opacity: 0.5;
+}
+
+.filterIcon {
+	margin-left: -32px;
+}
+
+.armyComp,
+.structComp {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.tabs {
+	background: transparent; 
+	border: none; 
+} 
+
+.tabs .ui-widget-header { 
+	background: transparent; 
+	border: none; 
+	-moz-border-radius: 0px; 
+	-webkit-border-radius: 0px; 
+	border-radius: 0px; 
+}
+
+.tabs .ui-tabs-panel {
+	display: none;
+	background: transparent;
+	border-width: 0px;
+	background: none;
+}
+
+.tabs .ui-tabs-nav .ui-state-default { 
+	background: transparent; 
+	border: none;
+} 
+
+.tabs .ui-tabs-nav .ui-state-active { 
+	background: transparent no-repeat bottom center; 
+	border: none; 
+} 
+
+.tabs .ui-tabs-nav .ui-state-default a { 
+	color: #c0c0c0; 
+} 
+
+.tabs .ui-tabs-nav .ui-state-active a,
+.tabs .ui-tabs-nav .ui-state-focus a { 
+	color: grey;
+	outline: none;
+}
+
+#buildorderTable {
+	max-height: 400px;
+	overflow: auto;
+}
+
+.portrait_border {
+	padding-top: 25px;
+	padding-left: 25px;
+	width: 140px;
+	height: 140px;
+	cursor: pointer;
+}
+
+.centered {
+	vertical-align: middle !important;
+}
+
+.nomargin {
+	margin: 0 !important;
+}
+
+.legendRow {
+	padding-left: 10%;
+	padding-right: 10%;
+	height: 40px;
+}
+
+.legendRow strong {
+	margin-right: 5px;
+	font-size: 18pt;
+}

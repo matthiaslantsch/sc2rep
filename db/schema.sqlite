@@ -1,0 +1,120 @@
+CREATE TABLE "tag" (
+  -- tag_1460100310
+  "idTag" integer NOT NULL PRIMARY KEY,
+  "name" varchar(255) NOT NULL,
+  "group" varchar(40) NOT NULL
+)
+
+CREATE TABLE "status" (
+  -- status_1460100311
+  "idStatus" integer NOT NULL PRIMARY KEY,
+  "name" varchar(10) NOT NULL
+)
+
+CREATE TABLE "match" (
+  -- match_1460100312
+  "idMatch" integer NOT NULL PRIMARY KEY,
+  "identifier" varchar(255) NOT NULL,
+  "isLadder" boolean NOT NULL,
+  "loops" integer NOT NULL,
+  "played" timestamp NOT NULL,
+  "length" integer NOT NULL,
+  "idStatus" integer NOT NULL,
+  "idPlayer" integer NOT NULL,
+  "pickRace" integer NOT NULL,
+  "playRace" integer NOT NULL,
+  "league" integer,
+  FOREIGN KEY ("idStatus") REFERENCES "status"("idStatus"),
+  FOREIGN KEY ("idMatch") REFERENCES "match"("idMatch"),
+  FOREIGN KEY ("idPlayer") REFERENCES "player"("idPlayer"),
+  FOREIGN KEY ("pickRace") REFERENCES "race"("idTag"),
+  FOREIGN KEY ("playRace") REFERENCES "race"("idTag"),
+  FOREIGN KEY ("league") REFERENCES "tag"("idTag")
+)
+
+CREATE TABLE "player" (
+  -- player_1460100313
+  "idPlayer" integer NOT NULL PRIMARY KEY,
+  "name" varchar(45) NOT NULL,
+  "clantag" varchar(10) NOT NULL,
+  "url" varchar(255) NOT NULL,
+  "bnet" varchar(10) NOT NULL,
+  "portrait" varchar(255),
+  "curLeague" varchar(15)
+)
+
+CREATE TABLE "race" (
+  -- race_1460100314
+  "idTag" integer NOT NULL,
+  "isPlayable" boolean NOT NULL,
+  CONSTRAINT "pkey_race" PRIMARY KEY ("idTag"),
+  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag")
+)
+
+CREATE TABLE "map" (
+  -- map_1460100315
+  "idTag" integer NOT NULL,
+  "identifier" varchar(255) NOT NULL,
+  "sizeX" integer,
+  "sizeY" integer,
+  "denied" boolean NOT NULL,
+  CONSTRAINT "pkey_map" PRIMARY KEY ("idTag"),
+  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag")
+)
+
+CREATE TABLE "season" (
+  -- season_1460100316
+  "idTag" integer NOT NULL,
+  "start" datetime NOT NULL,
+  "lock" datetime,
+  "end" datetime,
+  "number" integer NOT NULL,
+  CONSTRAINT "pkey_season" PRIMARY KEY ("idTag"),
+  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag")
+)
+
+CREATE TABLE "performance" (
+  -- performance_1460100317
+  "idTag" integer NOT NULL,
+  "RCR" integer,
+  "SQ" integer,
+  "AU" integer,
+  "APM" integer,
+  "isWin" boolean,
+  "team" integer NOT NULL,
+  "secondBase" integer,
+  "thirdBase" integer,
+  "onebaseSat" integer,
+  "twobaseSat" integer,
+  "threebaseSat" integer,
+  "workerCount" integer,
+  "sid" integer NOT NULL,
+  "divisionRank" varchar(20),
+  "leagueRank" varchar(20),
+  "serverRank" varchar(20),
+  "globalRank" varchar(20),
+  "points" integer,
+  "winrate" integer,
+  "number" integer NOT NULL,
+  "idMatch" integer NOT NULL,
+  "idPlayer" integer NOT NULL,
+  "pickRace" integer NOT NULL,
+  "playRace" integer NOT NULL,
+  "league" integer,
+  CONSTRAINT "pkey_performance" PRIMARY KEY ("idTag"),
+  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag"),
+  FOREIGN KEY ("idMatch") REFERENCES "match"("idMatch"),
+  FOREIGN KEY ("idPlayer") REFERENCES "player"("idPlayer"),
+  FOREIGN KEY ("pickRace") REFERENCES "race"("idTag"),
+  FOREIGN KEY ("playRace") REFERENCES "race"("idTag"),
+  FOREIGN KEY ("league") REFERENCES "tag"("idTag")
+)
+
+CREATE TABLE "match2tag" (
+  -- match2tag_1460100318
+  "idMatch" integer NOT NULL,
+  "idTag" integer NOT NULL,
+  FOREIGN KEY ("idMatch") REFERENCES "match"("idMatch"),
+  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag"),
+  CONSTRAINT "pkey_match2tag" PRIMARY KEY ("idMatch", "idTag")
+)

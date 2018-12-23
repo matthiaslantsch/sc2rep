@@ -10,267 +10,141 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-use HIS5\lib\activerecord\Schema as Schema;
+use holonet\activerecord\Schema;
 
 ##
-## buildType #
+## tag #
 ##
-Schema::createTable('buildType', function($t) {
-	$t->string("name")->setSizeDef('40');
-	$t->version("1460100322");
-});
-
-##
-## match #
-##
-Schema::createTable('match', function($t) {
-	$t->string("identifier")->setSizeDef('255');
-	$t->boolean("isLadder");
-	$t->integer("loops");
-	$t->timestamp("played")->setDefault('CURRENT_TIMESTAMP');
-	$t->integer("length");
-	$t->version("1460159150");
-});
-
-##
-## performance #
-##
-Schema::createTable('performance', function($t) {
-	$t->integer("RCR")->nullable();
-	$t->integer("SQ")->nullable();
-	$t->integer("AU")->nullable();
-	$t->integer("APM")->nullable();
-	$t->boolean("isWin")->nullable();
-	$t->integer("team");
-	$t->integer("secondBase")->nullable();
-	$t->integer("thirdBase")->nullable();
-	$t->integer("onebaseSat")->nullable();
-	$t->integer("twobaseSat")->nullable();
-	$t->integer("threebaseSat")->nullable();
-	$t->integer("workerCount")->nullable();
-	$t->integer("sid");
-	$t->string("divisionRank")->setSizeDef('20')->nullable();
-	$t->string("leagueRank")->setSizeDef('20')->nullable();
-	$t->string("serverRank")->setSizeDef('20')->nullable();
-	$t->string("globalRank")->setSizeDef('20')->nullable();
-	$t->integer("points")->nullable();
-	$t->integer("winrate")->nullable();
-	$t->version("1462186172");
-});
-
-##
-## permission #
-##
-Schema::createTable('permission', function($t) {
-	$t->string("permission")->setSizeDef('40');
-	$t->version("1449494964");
-});
-
-##
-## player #
-##
-Schema::createTable('player', function($t) {
-	$t->string("name")->setSizeDef('45');
-	$t->string("clantag")->setSizeDef('10');
-	$t->string("url")->setSizeDef('255');
-	$t->string("bnet")->setSizeDef('10');
-	$t->string("portrait")->setSizeDef('255')->nullable();
-	$t->string("curLeague")->setSizeDef('15')->nullable();
-	$t->version("1462802284");
+Schema::createTable("tag", function($table) {
+	$table->string("name");
+	$table->string("group", 40);
+	$table->version("1460100310");
 });
 
 ##
 ## status #
 ##
-Schema::createTable('status', function($t) {
-	$t->string("name")->setSizeDef('10');
-	$t->version("1460100321");
+Schema::createTable("status", function($table) {
+	$table->string("name", 10);
+	$table->version("1460100311");
 });
 
 ##
-## step #
+## match #
 ##
-Schema::createTable('step', function($t) {
-	$t->integer("supply");
-	$t->integer("time");
-	$t->integer("order");
-	$t->string("asset")->setSizeDef('40');
-	$t->string("descBrief")->setSizeDef('40')->nullable();
-	$t->string("descLonger")->setSizeDef('255')->nullable();
-	$t->boolean("chrono");
-	$t->version("1463119797");
+Schema::createExtendsTable("match", "match", function($table) {
+	$table->string("identifier");
+	$table->boolean("isLadder");
+	$table->integer("loops");
+	$table->timestamp("played");
+	$table->integer("length");
+	$table->integer("idStatus");
+	$table->integer("idPlayer");
+	$table->integer("pickRace");
+	$table->integer("playRace");
+	$table->integer("league")->nullable();
+	$table->version("1460100312");
 });
 
 ##
-## stepType #
+## player #
 ##
-Schema::createTable('stepType', function($t) {
-	$t->string("name")->setSizeDef('10');
-	$t->version("1463119795");
+Schema::createTable("player", function($table) {
+	$table->string("name", 45);
+	$table->string("clantag", 10);
+	$table->string("url");
+	$table->string("bnet", 10);
+	$table->string("portrait")->nullable();
+	$table->string("curLeague", 15)->nullable();
+	$table->version("1460100313");
 });
 
 ##
-## tag #
+## race #
 ##
-Schema::createTable('tag', function($t) {
-	$t->string("name")->setSizeDef('255');
-	$t->string("group")->setSizeDef('40');
-	$t->version("1460100310");
-});
-
-##
-## user #
-##
-Schema::createTable('user', function($t) {
-	$t->string("name")->setSizeDef('40');
-	$t->string("email")->setSizeDef('40');
-	$t->string("authHash")->setSizeDef('255')->nullable();
-	$t->version("1449494962");
-});
-
-##
-## userGroup #
-##
-Schema::createTable('userGroup', function($t) {
-	$t->string("name")->setSizeDef('40');
-	$t->version("1449494963");
-});
-
-##
-## build #
-##
-Schema::createExtendsTable('build', 'tag', function($t) {
-	$t->string("name")->setSizeDef('255');
-	$t->string("descBrief")->setSizeDef('255')->nullable();
-	$t->text("descLonger")->nullable();
-	$t->pkey("idTag");
-	$t->version("1463122905");
+Schema::createExtendsTable("race", "tag", function($table) {
+	$table->boolean("isPlayable");
+	$table->version("1460100314");
 });
 
 ##
 ## map #
 ##
-Schema::createExtendsTable('map', 'tag', function($t) {
-	$t->string("identifier")->setSizeDef('255');
-	$t->integer("sizeX")->nullable();
-	$t->integer("sizeY")->nullable();
-	$t->boolean("denied");
-	$t->pkey("idTag");
-	$t->version("1463642099");
-});
-
-##
-## match2tag #
-##
-Schema::createResolutionTable('match', 'tag', '1460100421');
-
-
-##
-## permission2user #
-##
-Schema::createResolutionTable('permission', 'user', '1449494965');
-
-
-##
-## permission2userGroup #
-##
-Schema::createResolutionTable('permission', 'userGroup', '1449494967');
-
-
-##
-## race #
-##
-Schema::createExtendsTable('race', 'tag', function($t) {
-	$t->boolean("isPlayable");
-	$t->pkey("idTag");
-	$t->version("1460100324");
+Schema::createExtendsTable("map", "tag", function($table) {
+	$table->string("identifier");
+	$table->integer("sizeX")->nullable();
+	$table->integer("sizeY")->nullable();
+	$table->boolean("denied");
+	$table->version("1460100315");
 });
 
 ##
 ## season #
 ##
-Schema::createExtendsTable('season', 'tag', function($t) {
-	$t->datetime("start");
-	$t->datetime("lock")->nullable();
-	$t->datetime("end")->nullable();
-	$t->integer("number");
-	$t->pkey("idTag");
-	$t->version("1460100325");
+Schema::createExtendsTable("season", "tag", function($table) {
+	$table->datetime("start");
+	$table->datetime("lock")->nullable();
+	$table->datetime("end")->nullable();
+	$table->integer("number");
+	$table->version("1460100316");
 });
 
 ##
-## user2userGroup #
+## performance #
 ##
-Schema::createResolutionTable('user', 'userGroup', '1449494966');
-
-
-##
-## build references #
-##
-Schema::changeTable('build', function($t) {
-	$t->addReference("tag", "idTag", "idTag");
-	$t->addReference("buildType", "idBuildType", "idBuildType");
-	$t->addReference("user", "idUser", "idUser");
-	$t->version("1463122905");
+Schema::createExtendsTable("performance", "tag", function($table) {
+	$table->integer("RCR")->nullable();
+	$table->integer("SQ")->nullable();
+	$table->integer("AU")->nullable();
+	$table->integer("APM")->nullable();
+	$table->boolean("isWin")->nullable();
+	$table->integer("team");
+	$table->integer("secondBase")->nullable();
+	$table->integer("thirdBase")->nullable();
+	$table->integer("onebaseSat")->nullable();
+	$table->integer("twobaseSat")->nullable();
+	$table->integer("threebaseSat")->nullable();
+	$table->integer("workerCount")->nullable();
+	$table->integer("sid");
+	$table->string("divisionRank", 20)->nullable();
+	$table->string("leagueRank", 20)->nullable();
+	$table->string("serverRank", 20)->nullable();
+	$table->string("globalRank", 20)->nullable();
+	$table->integer("points")->nullable();
+	$table->integer("winrate")->nullable();
+	$table->integer("number");
+	$table->integer("idMatch");
+	$table->integer("idPlayer");
+	$table->integer("pickRace");
+	$table->integer("playRace");
+	$table->integer("league")->nullable();
+	$table->version("1460100317");
 });
 
 ##
-## map references #
+## match2tag #
 ##
-Schema::changeTable('map', function($t) {
-	$t->addReference("tag", "idTag", "idTag");
-	$t->version("1463642099");
-});
+Schema::createResolutionTable("match", "tag", "1460100318");
 
 ##
 ## match references #
 ##
-Schema::changeTable('match', function($t) {
-	$t->addReference("status", "idStatus", "idStatus");
-	$t->version("1460159150");
+Schema::changeTable("match", function($table) {
+	$table->addReference("status", "idStatus", "idStatus");
+	$table->addReference("player", "idPlayer", "idPlayer");
+	$table->addReference("race", "pickRace", "idTag");
+	$table->addReference("race", "playRace", "idTag");
+	$table->addReference("tag", "league", "idTag");
+	$table->version("1460100312");
 });
 
 ##
 ## performance references #
 ##
-Schema::changeTable('performance', function($t) {
-	$t->addReference("match", "idMatch", "idMatch");
-	$t->addReference("player", "idPlayer", "idPlayer");
-	$t->addReference("race", "pickRace", "idTag");
-	$t->addReference("race", "playRace", "idTag");
-	$t->addReference("tag", "league", "idTag")->nullable();
-	$t->version("1462186172");
-});
-
-##
-## player references #
-##
-Schema::changeTable('player', function($t) {
-	$t->addReference("user", "idUser", "idUser")->nullable();
-	$t->version("1462802284");
-});
-
-##
-## race references #
-##
-Schema::changeTable('race', function($t) {
-	$t->addReference("tag", "idTag", "idTag");
-	$t->version("1460100324");
-});
-
-##
-## season references #
-##
-Schema::changeTable('season', function($t) {
-	$t->addReference("tag", "idTag", "idTag");
-	$t->version("1460100325");
-});
-
-##
-## step references #
-##
-Schema::changeTable('step', function($t) {
-	$t->addReference("build", "idBuild", "idTag");
-	$t->addReference("stepType", "type", "idStepType");
-	$t->version("1463119797");
+Schema::changeTable("performance", function($table) {
+	$table->addReference("match", "idMatch", "idMatch");
+	$table->addReference("player", "idPlayer", "idPlayer");
+	$table->addReference("race", "pickRace", "idTag");
+	$table->addReference("race", "playRace", "idTag");
+	$table->version("1460100317");
 });

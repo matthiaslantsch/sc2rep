@@ -1,0 +1,26 @@
+#Options allowing symlinks in the directories as well as disabling directory indexes by the apache server
+Options +FollowSymlinks -Indexes
+
+#Disallowing libwww bots to save the webserver from spam/bot traffic
+SetEnvIf User-Agent ^libwww bad_bot
+Deny from env=bad_bot
+
+#Setting the directory index to the entry file of the framework
+DirectoryIndex entry.php
+
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	#Allowing the user to run the framework from a subfolder of the webserver
+	#Conveniently stolen from symfony
+	RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+	RewriteRule ^(.*) - [E=BASE:%1]
+
+	#Rule to skip the next check if the request was already routed to the entry file
+	RewriteCond %{REQUEST_URI} (entry\.php) [NC]
+	RewriteRule ^ - [S=1]
+
+	#Routing all requests except for static files in the public directory to the entry file
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*) entry.php/$1 [QSA,L,PT]
+</IfModule>

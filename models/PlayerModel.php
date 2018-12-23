@@ -1,48 +1,41 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+* This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
- * class file for the Player model
+ * Model class for the PlayerModel model class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\models;
+namespace holonet\sc2rep\models;
 
-use HIS5\lib\activerecord as ar;
-use HIS5\sc2rep\helpers as helpers;
+use holonet\activerecord\ModelBase;
+use holonet\sc2rep\helpers\BnetprofileMiner;
 
 /**
- * player model class
- * 
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\sc2rep\models
+ * PlayerModel to wrap around the player table
+ *
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\models
  */
-class PlayerModel extends ar\ModelBase {
+class PlayerModel extends ModelBase {
 
 	/**
-	 * property containing belongsTo relationship mappings
+	 * contains relationship mapping for hasMany
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $hasMany Array with definitions for a has many relationship
 	 */
-	public static $belongsTo = [
-		"user" => ["forced" => false]
-	];
+	public static $hasMany = array("performances");
 
-	/**
-	 * property containing hasMany relationship mappings
-	 *
-	 * @access 	public
-	 * @var 	array with relationships
-	 */
-	public static $hasMany = ["performances"];
-	
 	/**
 	 * property containing verification data for some of the columns
 	 *
-	 * @access 	public
-	 * @var 	array with verification data
+	 * @access public
+	 * @var    array $validate Array with verification data
 	 */
 	public static $validate = array(
 		"name" => ["presence", "length" => ["max" => 45]],
@@ -58,17 +51,17 @@ class PlayerModel extends ar\ModelBase {
 	 * @return array with average values
 	 */
 	public function getAverageData() {
-		$db = ar\Database::init()->connector;
-		$result = $db->queryAll("SELECT SUM(m.length) AS totalTime,
+		$db = static::table()->conn();
+		$result = $db->queryAll('SELECT SUM(m.length) AS totalTime,
 								COUNT(m.idMatch) AS matchCount,
 								SUM(perf.SQ) AS spendingSkill,
 								SUM(perf.APM) AS apm,
 								SUM(case when perf.isWin = 1 then 1 else 0 end) AS winrate,
 								perf.playRace
-								FROM `performance` perf
-								JOIN `match` m USING(`idMatch`)
+								FROM "performance" perf
+								JOIN "match" m USING("idMatch")
 								WHERE perf.idPlayer = ? AND m.isLadder = 1
-								GROUP BY perf.playRace", [$this->id]);
+								GROUP BY perf.playRace', [$this->id]);
 
 		$ret = ["totalTime" => 0, "matchCount" => 0, "spendingSkill" => 0, "apm" => 0, "winrate" => 0, "races" => []];
 		foreach ($result as $raceGroup) {
@@ -101,15 +94,16 @@ class PlayerModel extends ar\ModelBase {
 	 *  -portrait
 	 *
 	 * @access public
+	 * @return void
 	 */
 	public function mineBnetProfile() {
+		//don't mine for bots
 		if($this->bnet != 0) {
-			//don't mine for bots
-			$miner = new helpers\BnetprofileMiner($this->url);
+			$miner = new BnetprofileMiner($this->url);
 			$profileData = $miner->mineProfile();
-			
-			if(isset($profileData["leagues"]["1v1-".$this->name])) {
-				$this->curLeague = $profileData["leagues"]["1v1-".$this->name];
+
+			if(isset($profileData["leagues"]["1v1-{$this->name}"])) {
+				$this->curLeague = $profileData["leagues"]["1v1-{$this->name}"];
 			}
 
 			if(isset($profileData["portrait"])) {
@@ -130,7 +124,7 @@ class PlayerModel extends ar\ModelBase {
 	 * getter method to get the current league, from where it was updated last
 	 *
 	 * @access public
-	 * @return string the league at the time the match
+	 * @return string the league from when it was updated last
 	 */
 	public function getCurrentLeague() {
 		return !isset($this->curLeague) ? "default" : $this->curLeague;

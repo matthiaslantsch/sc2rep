@@ -1,0 +1,18 @@
+{
+	"name": "holonet/sc2rep",
+	"description": "Yet another sc2 replay parser",
+	"type": "project",
+	"authors": [
+		{
+			"name": "matthias.lantsch",
+			"email": "matthias.lantsch@bluewin.ch"
+		}
+	],
+	"autoload": {
+		"psr-4" : {
+			"holonet\\sc2rep\\" : "sc2rep",
+			"holonet\\sc2rep\\tests\\" : "sc2rep/tests/"
+		}
+	},
+	"require": {}
+}

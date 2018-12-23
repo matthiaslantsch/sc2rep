@@ -1,37 +1,38 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+* This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
- * class file for the Performance model
+ * Model class for the PerformanceModel model class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\models;
-
-use HIS5\lib\activerecord as ar;
+namespace holonet\sc2rep\models;
 
 /**
- * performance model class
- * 
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\sc2rep\models
+ * PerformanceModel to wrap around the performance table
+ *
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\models
  */
-class PerformanceModel extends ar\ModelBase {
+class PerformanceModel extends TagModel {
 
 	/**
-	 * property containing belongsTo relationship mappings
+	 * contains relationship mapping for belongsTo
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $belongsTo Array with definitions for a belongs to relationship
 	 */
 	public static $belongsTo = ["match", "player"];
 
 	/**
 	 * property containing verification data for some of the columns
 	 *
-	 * @access 	public
-	 * @var 	array with verification data
+	 * @access public
+	 * @var    array $validate Array with verification data
 	 */
 	public static $validate = array(
 		"pickRace" => ["presence"],
@@ -83,8 +84,10 @@ class PerformanceModel extends ar\ModelBase {
 	 * 	averageUnspent
 	 * 	averageIncome
 	 * 	spendingSkill
+	 *
 	 * @access public
-	 * @param  array data | array with keys as described above
+	 * @param  array $newData Array with keys as described above
+	 * @return void
 	 */
 	public function update($newData) {
 		if(isset($newData["basetimings"][0])) {

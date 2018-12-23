@@ -1,55 +1,58 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+* This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
- * class file for the Match model
+ * Model class for the MatchModel model class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\models;
+namespace holonet\sc2rep\models;
 
-use HIS5\lib\activerecord as ar;
-use HIS5\lib\Common as co;
-use HIS5\sc2rep\helpers as helpers;
+use holonet\activerecord\ModelBase;
+use holonet\sc2rep\models\PerformanceModel;
+use holonet\sc2rep\helpers\ImportHelper;
 
 /**
- * match model class
- * 
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\PHP\sc2rep\models
+ * MatchModel to wrap around the match table
+ *
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\models
  */
-class MatchModel extends ar\ModelBase {
+class MatchModel extends ModelBase {
 
 	/**
-	 * property containing hasMany relationship mappings
+	 * contains relationship mapping for hasMany
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $hasMany Array with definitions for a has many relationship
 	 */
-	public static $hasMany = ["performances"];
+	public static $hasMany = array("performances");
 
 	/**
-	 * property containing belongsTo relationship mappings
+	 * contains relationship mapping for belongsTo
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $belongsTo Array with definitions for a belongs to relationship
 	 */
-	public static $belongsTo = ["status"];
+	public static $belongsTo = array("status");
 
 	/**
-	 * property containing belongsTo relationship mappings
+	 * property containing many2many relationship mappings
 	 *
-	 * @access 	public
-	 * @var 	array with relationships
+	 * @access public
+	 * @var    array $many2many Array with relationship mappings
 	 */
-	public static $many2many = ["tags"];
-	
+	public static $many2many = array("tags");
+
 	/**
 	 * property containing verification data for some of the columns
 	 *
-	 * @access 	public
-	 * @var 	array with verification data
+	 * @access public
+	 * @var    array $validate Array with verification data
 	 */
 	public static $validate = array(
 		"identifier" => ["presence", "length" => ["max" => 255]],
@@ -73,7 +76,7 @@ class MatchModel extends ar\ModelBase {
 					$ret[$tag->group][] = $tag;
 				} else {
 					$cur = $ret[$tag->group];
-					$ret[$tag->group] = [$cur, $tag];			
+					$ret[$tag->group] = [$cur, $tag];
 				}
 			} else {
 				$ret[$tag->group] = $tag;
@@ -100,10 +103,10 @@ class MatchModel extends ar\ModelBase {
 	 * getter method to return a team string, depending on the team number
 	 *
 	 * @access public
-	 * @param  the team number, starting with one
+	 * @param  int $team The team number, starting with one
 	 * @return string with the corresponding player's names
 	 */
-	public function getTeamString($team = 1) {
+	public function getTeamString(int $team = 1) {
 		$teams = $this->getTeams();
 		if(!isset($teams[$team])) {
 			return "";
@@ -120,10 +123,10 @@ class MatchModel extends ar\ModelBase {
 	 * getter method to return a performance object of a player with a certain sid
 	 *
 	 * @access public
-	 * @param  sid int | the sid of the requested player
+	 * @param  integer $sid the sid of the requested player
 	 * @return PerformanceModel the player performance model
 	 */
-	public function getPlayerBySid($sid) {
+	public function getPlayerBySid(int $sid) {
 		return PerformanceModel::get(["idMatch" => $this->id, "sid" => $sid]);
 	}
 
@@ -131,7 +134,7 @@ class MatchModel extends ar\ModelBase {
 	 * getter method to get a title string
 	 *
 	 * @access public
-	 * @return title a string
+	 * @return title a title string for this match
 	 */
 	public function getTitle() {
 		$map = "";
@@ -165,7 +168,7 @@ class MatchModel extends ar\ModelBase {
 		if($dist >= 86400) {
 			return (int)($dist / 86400) . ' days ago';
 		} elseif($dist >= 3600) {
-			return (int)($dist / 3600) . ' hours';
+			return (int)($dist / 3600) . ' hours ago';
 		} if($dist >= 60) {
 			return (int)($dist / 60) . ' minutes ago';
 		} else {
@@ -180,7 +183,7 @@ class MatchModel extends ar\ModelBase {
 	 * @return the path where this file should be, considering the standards
 	 */
 	public function getPath() {
-		return co\registry("app.path").DIRECTORY_SEPARATOR."updir".DIRECTORY_SEPARATOR."SC2REP-".$this->id.".SC2replay";
+		return co\filepatch(co\registry("app.path"), "updir", "SC2REP-".$this->id.".SC2replay");
 	}
 
 	/**
@@ -188,12 +191,12 @@ class MatchModel extends ar\ModelBase {
 	 * allows only a few datapacks
 	 *
 	 * @access public
-	 * @param  string dataPack | the name of the datapack requested
-	 * @return string data | the contents of the requested datapack file
+	 * @param  string $dataPack The name of the datapack requested
+	 * @return string $data The contents of the requested datapack file
 	 */
 	public function loadDataPack($dataPack) {
-		$cachePath = sys_get_temp_dir().DIRECTORY_SEPARATOR."sc2rep_cache".DIRECTORY_SEPARATOR."{$this->identifier}".DIRECTORY_SEPARATOR;
-		if(!file_exists($cachePath.$dataPack.".json")) {
+		$dataPackFile = co\filepath(sys_get_temp_dir(), "sc2rep_cache", $this->identifier, "{$dataPack}.json");
+		if(!file_exists($dataPackFile)) {
 			//chache non existent
 			if($this->idStatus == 2) {
 				//another parse request has already been sent
@@ -204,10 +207,9 @@ class MatchModel extends ar\ModelBase {
 				$this->save();
 
 				try {
-					$importer = new helpers\ImportHelper($this->getPath());
+					$importer = new ImportHelper($this->getPath());
 					$importer->parse();
 				} catch (\Exception $e) {
-					die(var_dump($e->getMessage()));
 					$this->idStatus = 3;
 					$this->save();
 					return null;
@@ -220,7 +222,7 @@ class MatchModel extends ar\ModelBase {
 			}
 		}
 
-		return file_get_contents($cachePath.$dataPack.".json");
+		return file_get_contents($dataPackFile);
 	}
 
 }

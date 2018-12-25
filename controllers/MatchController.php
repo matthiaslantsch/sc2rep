@@ -84,7 +84,7 @@ class MatchController extends FWController {
 			$tags = $data["match"]->tagsToArray();
 			return [
 				"players" => "{$data["match"]->getTeamString(1)} vs {$data["match"]->getTeamString(2)}",
-				"matchup" => "{$tags["gametype"]->__toArray("name")} - {$tags["matchup"]->name}",
+				"matchup" => "{$tags["gametype"]} - {$tags["matchup"]->name}",
 				"map" => "{$tags["map"]->name}"
 			];
 		});

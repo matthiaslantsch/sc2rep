@@ -5,7 +5,7 @@ function initCharts() {
 		return false;
 	});
 
-	$('#armyValChart').highcharts().renderer.image(returnFWAlias()+'public/gfx/maps/'+$("#mapField").val()+'.jpg', 50, 50, 250, 250).attr({
+	$('#armyValChart').highcharts().renderer.image(returnFWAlias()+'gfx/maps/'+$("#mapField").val()+'.jpg', 50, 50, 250, 250).attr({
 		zIndex: 3
 	}).add();
 
@@ -14,7 +14,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -23,7 +23,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -32,7 +32,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -41,7 +41,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -50,7 +50,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -59,7 +59,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -68,7 +68,7 @@ function initCharts() {
 		$.each(this.points, function(i, point) {
 			s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 		});
-		
+
 		return s;
 	});
 
@@ -100,7 +100,7 @@ function initCharts() {
 				$.each(this.points, function(i, point) {
 					s += '<div style="color:'+point.series.color+'";font-weight:bold;">'+point.series.name+' :</div> '+point.y+'<br>';
 				});
-				
+
 				return s;
 			},
 			crosshairs: {
@@ -286,7 +286,7 @@ $(function() {
 			enabled: false
 		}
 	});
-	
+
 	var baseTimingChart = $("#baseTimingChart").highcharts();
 	var saturationTimingChart = $("#saturationTimingChart").highcharts();
 	var workerCountChart = $("#workersBuilt").highcharts();

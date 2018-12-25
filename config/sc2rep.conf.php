@@ -11,10 +11,12 @@
  * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
+$config["pythonExe"] = "C:\\Python27\\python.exe";
+
  /**
   * Database conntection configuration
   */
- $config["db"] = array(
+$config["db"] = array(
  	/**
  	 * the pdo driver to be used for the database (need to have the driver+activerecord crud helpers installed)
  	 */
@@ -23,4 +25,4 @@
  	 * The file of the sqlite database
  	 */
  	"file" => "%app.vardir%sc2rep.db"
- );
+);

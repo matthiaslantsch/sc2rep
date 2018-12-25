@@ -34,11 +34,6 @@ class MatchCreateMigration implements Migration {
 			$t->timestamp("played");
 			$t->integer("length");
 			$t->addReference("status");
-			$t->addReference("match", "idMatch", "idMatch");
-			$t->addReference("player", "idPlayer", "idPlayer");
-			$t->addReference("race", "pickRace", "idTag");
-			$t->addReference("race", "playRace", "idTag");
-			$t->addReference("tag", "league", "idTag")->nullable();
 		});
 	}
 

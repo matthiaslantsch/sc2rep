@@ -21,6 +21,7 @@ PlayerModel::create([
 	"url" => "",
 	"bnet" => 0
 ], true);
+
 TagModel::create([
 	"name" => "1v1",
 	"group" => "gametype"

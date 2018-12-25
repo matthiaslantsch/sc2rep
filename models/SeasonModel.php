@@ -39,4 +39,14 @@ class SeasonModel extends TagModel {
 		"number" => ["presence"]
 	);
 
+	/**
+	 * convenience alias function for select([])
+	 * overwritten to sort the seasons from newest to oldest by default
+	 *
+	 * @access public
+	 * @return array with the result objects
+	 */
+	public static function all() {
+		return static::select(array("ORDER" => "start"));
+	}
 }

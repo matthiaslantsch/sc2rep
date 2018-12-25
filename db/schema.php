@@ -32,17 +32,13 @@ Schema::createTable("status", function($table) {
 ##
 ## match #
 ##
-Schema::createExtendsTable("match", "match", function($table) {
+Schema::createTable("match", function($table) {
 	$table->string("identifier");
 	$table->boolean("isLadder");
 	$table->integer("loops");
 	$table->timestamp("played");
 	$table->integer("length");
 	$table->integer("idStatus");
-	$table->integer("idPlayer");
-	$table->integer("pickRace");
-	$table->integer("playRace");
-	$table->integer("league")->nullable();
 	$table->version("1460100312");
 });
 
@@ -92,7 +88,7 @@ Schema::createExtendsTable("season", "tag", function($table) {
 ##
 ## performance #
 ##
-Schema::createExtendsTable("performance", "tag", function($table) {
+Schema::createTable("performance", function($table) {
 	$table->integer("RCR")->nullable();
 	$table->integer("SQ")->nullable();
 	$table->integer("AU")->nullable();
@@ -112,7 +108,6 @@ Schema::createExtendsTable("performance", "tag", function($table) {
 	$table->string("globalRank", 20)->nullable();
 	$table->integer("points")->nullable();
 	$table->integer("winrate")->nullable();
-	$table->integer("number");
 	$table->integer("idMatch");
 	$table->integer("idPlayer");
 	$table->integer("pickRace");
@@ -131,10 +126,6 @@ Schema::createResolutionTable("match", "tag", "1460100318");
 ##
 Schema::changeTable("match", function($table) {
 	$table->addReference("status", "idStatus", "idStatus");
-	$table->addReference("player", "idPlayer", "idPlayer");
-	$table->addReference("race", "pickRace", "idTag");
-	$table->addReference("race", "playRace", "idTag");
-	$table->addReference("tag", "league", "idTag");
 	$table->version("1460100312");
 });
 
@@ -146,5 +137,6 @@ Schema::changeTable("performance", function($table) {
 	$table->addReference("player", "idPlayer", "idPlayer");
 	$table->addReference("race", "pickRace", "idTag");
 	$table->addReference("race", "playRace", "idTag");
+	$table->addReference("tag", "league", "idTag");
 	$table->version("1460100317");
 });

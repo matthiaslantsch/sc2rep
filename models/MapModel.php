@@ -12,6 +12,8 @@
 
 namespace holonet\sc2rep\models;
 
+use holonet\common as co;
+
 /**
  * MapModel to wrap around the map table
  *
@@ -47,8 +49,9 @@ class MapModel extends TagModel {
 	 * @return string with the path to the minimap file
 	 */
 	public function minimapPath() {
-		return co\registry("app.path").DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.
-			"gfx".DIRECTORY_SEPARATOR."maps".DIRECTORY_SEPARATOR."{$this->identifier}.jpg";
+		return co\filepath(
+			co\registry("app.publicdir"), "sc2rep", "gfx", "maps", "{$this->identifier}.jpg"
+		);
 	}
 
 }

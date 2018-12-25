@@ -1,23 +1,24 @@
 <?php
 /**
- * This file is part of the sc2rep replay parser project
+ * This file is part of the sc2rep project
  * (c) Matthias Lantsch
  *
  * class file for the MatchFilter filter resolver class
+ *
+ * @package sc2rep
+ * @license http://opensource.org/licenses/gpl-license.php  GNU Public License
+ * @author  Matthias Lantsch <matthias.lantsch@bluewin.ch>
  */
 
-namespace HIS5\sc2rep\helpers;
+namespace holonet\sc2rep\helpers;
 
-use HIS5\sc2rep\models as models;
-use HIS5\lib\Common as co;
-use HIS5\holoFW\core\error as error;
+use holonet\sc2rep\models\MatchModel;
 
 /**
  * helper class used to resolve the match filters submitted by GET
  *
- * @author  Matthias Lantsch
- * @version 2.0.0
- * @package HIS5\sc2rep\helpers
+ * @author  matthias.lantsch
+ * @package holonet\sc2rep\helpers
  */
 class MatchFilter {
 
@@ -25,17 +26,19 @@ class MatchFilter {
 	 * method resolving the via get submitted parameters and returning a result set of matches
 	 *
 	 * @access public
-	 * @param  count int | the number of matches requested
-	 * @param  offset int | the scrolling offset
+	 * @param  array $tags The tags submitted by $_GET
+	 * @param  int $count The number of matches requested
+	 * @param  int $offset The scrolling offset
+	 * @return array of matches matching the filter
 	 */
-	public static function resolveGET($count = 10, $offset = 0) {
+	public static function resolveGET(array $tags = array(), int $count = 10, int $offset = 0) {
 		$idsNotMatches = [];
 		$idsYesMatches = [];
-		if(isset($_GET["tags"]["map"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["map"])) {
+			$idsYesMatches["map"] = MatchModel::select([
 				"SELECT" => "idMatch",
 				"tag.group" => "map",
-				"tag.name" => $_GET["tags"]["map"]
+				"tag.name" => $tags["map"]
 			]);
 
 			//none can be found
@@ -44,18 +47,21 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["isVSAi"])) {
-			$idsNotMatches += models\MatchModel::select([
+		if(isset($tags["isVSAi"])) {
+			$idsNotMatches += MatchModel::select([
 				"SELECT" => "idMatch",
 				"tag.name" => "'vs AI"
 			]);
 		}
 
-		if(isset($_GET["tags"]["league"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["league"])) {
+			foreach ($tags["league"] as $i => $league) {
+				$tags["league"][$i] = ucfirst($league);
+			}
+			$idsYesMatches["league"] = MatchModel::select([
 				"SELECT" => "idMatch",
 				"tag.group" => "league",
-				"tag.name" => $_GET["tags"]["league"]
+				"tag.name" => $tags["league"]
 			]);
 
 			//none can be found
@@ -64,8 +70,8 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["proGames"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["proGames"])) {
+			$idsYesMatches["proGames"] = MatchModel::select([
 				"SELECT" => "idMatch",
 				"tag.group" => "player"
 			]);
@@ -76,10 +82,10 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["season"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["season"])) {
+			$idsYesMatches["season"] = MatchModel::select([
 				"SELECT" => "idMatch",
-				"tag.idTag" => $_GET["tags"]["season"]
+				"tag.idTag" => $tags["season"]
 			]);
 
 			//none can be found
@@ -88,10 +94,10 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["matchup"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["matchup"])) {
+			$idsYesMatches["matchup"] = MatchModel::select([
 				"SELECT" => "idMatch",
-				"tag.name" => $_GET["tags"]["matchup"]
+				"tag.name" => $tags["matchup"]
 			]);
 
 			//none can be found
@@ -100,10 +106,10 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["other"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["other"])) {
+			$idsYesMatches["other"] = MatchModel::select([
 				"SELECT" => "idMatch",
-				"tag.name" => $_GET["tags"]["other"]
+				"tag.name" => $tags["other"]
 			]);
 
 			//none can be found
@@ -112,24 +118,24 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["team1"]) || isset($_GET["tags"]["team2"])) {
-			if(isset($_GET["tags"]["team1"]) && isset($_GET["tags"]["team2"])) {
-				sort($_GET["tags"]["team1"]);
-				sort($_GET["tags"]["team2"]);
+		if(isset($tags["team1"]) || isset($tags["team2"])) {
+			if(isset($tags["team1"]) && isset($tags["team2"])) {
+				sort($tags["team1"]);
+				sort($tags["team2"]);
 
-				$likeArr[] = implode("%", $_GET["tags"]["team1"]);
-				$likeArr[] = implode("%", $_GET["tags"]["team2"]);
+				$likeArr[] = implode("%", $tags["team1"]);
+				$likeArr[] = implode("%", $tags["team2"]);
 				sort($likeArr);
 				$like = "%".implode("%v%", $likeArr)."%";
-			} elseif(isset($_GET["tags"]["team1"])) {
-				sort($_GET["tags"]["team1"]);
-				$like = "%".implode("%", $_GET["tags"]["team1"])."%";
-			} elseif(isset($_GET["tags"]["team2"])) {
-				sort($_GET["tags"]["team2"]);
-				$like = "%".implode("%", $_GET["tags"]["team2"])."%";
+			} elseif(isset($tags["team1"])) {
+				sort($tags["team1"]);
+				$like = "%".implode("%", $tags["team1"])."%";
+			} elseif(isset($tags["team2"])) {
+				sort($tags["team2"]);
+				$like = "%".implode("%", $tags["team2"])."%";
 			}
 
-			$idsYesMatches += models\MatchModel::select([
+			$idsYesMatches["team"] = MatchModel::select([
 				"SELECT" => "idMatch",
 				"tag.name[~]" => $like,
 				"tag.group" => "matchup"
@@ -141,10 +147,10 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["player1"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["player1"])) {
+			$idsYesMatches["player1"] = MatchModel::select([
 				"SELECT" => "idMatch",
-				"performance.idPlayer" => $_GET["tags"]["player1"],
+				"performance.idPlayer" => $tags["player1"],
 			]);
 
 			//none can be found
@@ -153,10 +159,10 @@ class MatchFilter {
 			}
 		}
 
-		if(isset($_GET["tags"]["player2"])) {
-			$idsYesMatches += models\MatchModel::select([
+		if(isset($tags["player2"])) {
+			$idsYesMatches["player2"] = MatchModel::select([
 				"SELECT" => "idMatch",
-				"performance.idPlayer" => $_GET["tags"]["player2"],
+				"performance.idPlayer" => $tags["player2"],
 			]);
 
 			//none can be found
@@ -173,24 +179,20 @@ class MatchFilter {
 		];
 
 		$idsNo = [];
-
 		if(!empty($idsYesMatches)) {
-			foreach ($idsYesMatches as $entry) {
-				$idsYes[] = $entry["idMatch"];
+			if(count($idsYesMatches) > 1) {
+				$idsYesMatches = call_user_func_array('array_intersect', $idsYesMatches);
+			} else {
+				$idsYesMatches = array_shift($idsYesMatches);
 			}
-
-			$queryOptions["idMatch"] = $idsYes;
+			$queryOptions["idMatch"] = $idsYesMatches;
 		}
 
 		if(!empty($idsNotMatches)) {
-			foreach ($idsNotMatches as $entry) {
-				$idsNo[] = $entry["idMatch"];
-			}
-
-			$queryOptions["idMatch[!]"] = $idsNo;
+			$queryOptions["idMatch[!]"] = $idsNotMatches;
 		}
 
-		return models\MatchModel::select($queryOptions);
+		return MatchModel::select($queryOptions);
 	}
 
 }

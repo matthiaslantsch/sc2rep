@@ -16,7 +16,7 @@ use holonet\activerecord\Migration;
 use holonet\activerecord\Schema;
 
 /**
- * create the performance table (extending the "tag" table)
+ * create the performance table
  *
  * @author  matthias.lantsch
  * @package holonet\sc2rep\db\migrate
@@ -27,7 +27,7 @@ class PerformanceCreateMigration implements Migration {
 	 * migration into the up direction
 	 */
 	public static function up() {
-		Schema::createExtendsTable('performance', 'tag', function($t) {
+		Schema::createTable('performance', function($t) {
 			$t->integer("RCR")->nullable();
 			$t->integer("SQ")->nullable();
 			$t->integer("AU")->nullable();
@@ -47,7 +47,6 @@ class PerformanceCreateMigration implements Migration {
 			$t->string("globalRank")->size(20)->nullable();
 			$t->integer("points")->nullable();
 			$t->integer("winrate")->nullable();
-			$t->integer("number");
 			$t->addReference("match");
 			$t->addReference("player");
 			$t->addReference("race", "pickRace", "idTag");

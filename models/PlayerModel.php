@@ -12,7 +12,9 @@
 
 namespace holonet\sc2rep\models;
 
+use holonet\activerecord\Database;
 use holonet\activerecord\ModelBase;
+use holonet\sc2rep\helpers\RankedFTWMiner;
 use holonet\sc2rep\helpers\BnetprofileMiner;
 
 /**
@@ -51,7 +53,7 @@ class PlayerModel extends ModelBase {
 	 * @return array with average values
 	 */
 	public function getAverageData() {
-		$db = static::table()->conn();
+		$db = Database::init()->connector;
 		$result = $db->queryAll('SELECT SUM(m.length) AS totalTime,
 								COUNT(m.idMatch) AS matchCount,
 								SUM(perf.SQ) AS spendingSkill,
@@ -97,6 +99,14 @@ class PlayerModel extends ModelBase {
 	 * @return void
 	 */
 	public function mineBnetProfile() {
+		//because of the new bnet page, the old crawler doesn't work atm
+		//we're just using the latest 1v1 rating from rankedftw
+		$rankings = RankedFTWMiner::getRanking("?mode=1v1&player={$this->url}");
+		if($rankings !== false) {
+			$this->curLeague = array_shift($rankings);
+		}
+		return;
+
 		//don't mine for bots
 		if($this->bnet != 0) {
 			$miner = new BnetprofileMiner($this->url);
@@ -127,7 +137,7 @@ class PlayerModel extends ModelBase {
 	 * @return string the league from when it was updated last
 	 */
 	public function getCurrentLeague() {
-		return !isset($this->curLeague) ? "default" : $this->curLeague;
+		return $this->curLeague === null ? "default" : $this->curLeague;
 	}
 
 	/**

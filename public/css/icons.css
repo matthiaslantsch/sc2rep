@@ -18,7 +18,7 @@
 	display: inline-block;
 	width: 38px;
 	height: 38px;
-	background-image: url(/sc2rep/public/gfx/upgrades.jpg);
+	background-image: url(/sc2rep/gfx/upgrades.jpg);
 	background-repeat: no-repeat;
 	background-size: 882px 135px;
 }
@@ -260,7 +260,7 @@
 	display: inline-block;
 	width: 60px;
 	height: 61px;
-	background-image: url(/sc2rep/public/gfx/units.jpg);
+	background-image: url(/sc2rep/gfx/units.jpg);
 	background-repeat: no-repeat;
 	background-size: 1083px 462px;
 }
@@ -308,7 +308,7 @@
 }
 
 .immortal_smaller {
-	background-position: -407px -2.5px; 
+	background-position: -407px -2.5px;
 }
 
 .colossus_smaller {
@@ -332,19 +332,19 @@
 }
 
 .carrier_smaller {
-	background-position: -2px -52px; 
+	background-position: -2px -52px;
 }
 
 .interceptor_smaller {
-	background-position: -47px -52px; 
+	background-position: -47px -52px;
 }
 
 .mothershipcore_smaller {
-	background-position: -92px -52px; 
+	background-position: -92px -52px;
 }
 
 .mothership_smaller {
-	background-position: -137.5px -52px;  
+	background-position: -137.5px -52px;
 }
 
 .adept_smaller {
@@ -393,7 +393,7 @@
 }
 
 .siegetank_smaller {
-	background-position: -407px -99.5px; 
+	background-position: -407px -99.5px;
 }
 
 .thor_smaller {
@@ -465,7 +465,7 @@
 }
 
 .swarmhostmp_smaller, .swarmhost_smaller {
-	background-position: -407px -198.5px; 
+	background-position: -407px -198.5px;
 }
 
 .infestor_smaller {
@@ -485,7 +485,7 @@
 }
 
 .overlord_smaller {
-	background-position: -2px -248px; 
+	background-position: -2px -248px;
 }
 
 .overseer_smaller {
@@ -501,7 +501,7 @@
 }
 
 .lurkermp_smaller {
-	background-position: -407px -248px; 
+	background-position: -407px -248px;
 }
 
 .probe {
@@ -541,11 +541,11 @@
 }
 
 .immortal {
-	background-position: -653px -4.5px; 
+	background-position: -653px -4.5px;
 }
 
 .colossus {
-	background-position: -725px -4.5px; 
+	background-position: -725px -4.5px;
 }
 
 .phoenix {
@@ -565,7 +565,7 @@
 }
 
 .carrier {
-	background-position: -4px -83.5px; 
+	background-position: -4px -83.5px;
 }
 
 .interceptor {
@@ -573,19 +573,19 @@
 }
 
 .mothershipcore {
-	background-position: -149px -83.5px; 
+	background-position: -149px -83.5px;
 }
 
 .mothership {
-	background-position: -220px -83.5px; 
+	background-position: -220px -83.5px;
 }
 
 .adept {
-	background-position: -366px -83.5px; 
+	background-position: -366px -83.5px;
 }
 
 .disruptor {
-	background-position: -437px -83.5px; 
+	background-position: -437px -83.5px;
 }
 
 .scv {
@@ -660,7 +660,7 @@
 }
 
 .larva {
-	background-position: -4px -317.5px; 
+	background-position: -4px -317.5px;
 }
 
 .drone {
@@ -696,7 +696,7 @@
 }
 
 .swarmhostmp {
-	background-position: -653px -317.5px; 
+	background-position: -653px -317.5px;
 }
 
 .infestor {
@@ -852,11 +852,11 @@
 }
 
 .planetaryfortress_smaller {
-	background-position: -678px -50.2px; 
+	background-position: -678px -50.2px;
 }
 
 .orbitalcommand_smaller {
-	background-position: -724px -50.2px; 
+	background-position: -724px -50.2px;
 }
 
 .banelingnest_smaller {
@@ -927,7 +927,7 @@
 	display: inline-block;
 	width: 60px;
 	height: 60px;
-	background-image: url(/sc2rep/public/gfx/structures.jpg);
+	background-image: url(/sc2rep/gfx/structures.jpg);
 	background-repeat: no-repeat;
 	background-size: 1229px 226px;
 }

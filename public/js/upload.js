@@ -1,6 +1,6 @@
 $(function(){
 	$("#dropper").dropper({
-		action: returnFWAlias()+"upload.json",
+		action: returnFWAlias()+"upload",
 		label: '<h3><span class="glyphicon glyphicon-upload"></span> Drag and drop or click to select the replay file</h3>',
 		maxQueue: 1,
 		postKey: "replayfile"
@@ -29,7 +29,7 @@ function onFileComplete(e, file, response) {
     } else {
  		showAlert("Successfully uploaded replay file", "success");
 	    $(window).unbind('beforeunload');
-	    window.location.assign(returnFWAlias()+"match/"+response.idMatch);
+	    window.location.assign(returnFWAlias()+"matches/"+response.idMatch);
     }
 }
 

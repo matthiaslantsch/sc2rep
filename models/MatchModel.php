@@ -12,6 +12,7 @@
 
 namespace holonet\sc2rep\models;
 
+use holonet\common as co;
 use holonet\activerecord\ModelBase;
 use holonet\sc2rep\models\PerformanceModel;
 use holonet\sc2rep\helpers\ImportHelper;
@@ -67,7 +68,7 @@ class MatchModel extends ModelBase {
 	 * @access public
 	 * @return array with the corresponding tags ordered by group
 	 */
-	public function getTags() {
+	public function tagsToArray() {
 		$ret = [];
 		$tags = TagModel::select(["match.idMatch" => $this->id]);
 		foreach ($tags as $tag) {
@@ -183,7 +184,7 @@ class MatchModel extends ModelBase {
 	 * @return the path where this file should be, considering the standards
 	 */
 	public function getPath() {
-		return co\filepatch(co\registry("app.path"), "updir", "SC2REP-".$this->id.".SC2replay");
+		return co\filepath(co\registry("app.vardir"), "updir", "SC2REP-".$this->id.".SC2replay");
 	}
 
 	/**

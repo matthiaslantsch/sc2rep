@@ -48,7 +48,7 @@ class PerformanceModel extends TagModel {
 	 * @return string the picked race
 	 */
 	public function getPickedRace() {
-		return TagModel::find($this->data["pickRace"])->name;
+		return TagModel::find($this->readAttribute("pickRace"))->name;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class PerformanceModel extends TagModel {
 	 * @return string the played race
 	 */
 	public function getPlayedRace() {
-		return TagModel::find($this->data["playRace"])->name;
+		return TagModel::find($this->readAttribute("playRace"))->name;
 	}
 
 	/**
@@ -68,8 +68,7 @@ class PerformanceModel extends TagModel {
 	 * @return string the league at the time the match
 	 */
 	public function getCurrentLeague() {
-		$tag = TagModel::find($this->data["league"]);
-		if($tag !== null) {
+		if($this->readAttribute("league") !== null && ($tag = TagModel::find($this->readAttribute("league"))) !== null) {
 			return $tag->name;
 		} else {
 			return "default";

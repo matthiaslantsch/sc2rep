@@ -4,7 +4,7 @@ $(function() {
 	$.widget.bridge('uibutton', $.ui.button);
 
 	$("#searchField").autocomplete({
-		source: returnFWAlias()+"api/players.json",
+		source: returnFWAlias()+"api/players",
 		minLength: 5,
 		select: function(event, ui) {
 			window.location.assign(returnFWAlias()+"player/"+ui.item.id);
@@ -21,9 +21,9 @@ $(function() {
 		}
 	});
 
-	$(".upgrade_icons").css("background-image: url("+returnFWAlias()+"public/gfx/upgrades.jpg)");
-	$(".unit_icons").css("background-image: url("+returnFWAlias()+"public/gfx/units.jpg)");
-	$(".buildings_icons").css("background-image: url("+returnFWAlias()+"public/gfx/structures.jpg)");
+	$(".upgrade_icons").css("background-image: url("+returnFWAlias()+"gfx/upgrades.jpg)");
+	$(".unit_icons").css("background-image: url("+returnFWAlias()+"gfx/units.jpg)");
+	$(".buildings_icons").css("background-image: url("+returnFWAlias()+"gfx/structures.jpg)");
 
 	$(document).on("click", ".copyButton", function() {
 		$("#copyFrom").focus();

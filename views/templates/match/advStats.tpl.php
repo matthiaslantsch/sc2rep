@@ -5,7 +5,7 @@
 	usort($buildArr, function($a, $b) {
 		return $a["started"] - $b["started"];
 	});
-	$build = \HIS5\sc2rep\models\BuildModel::fromArray($buildArr, "sc2rep match {$match->id}");
+	//$build = \HIS5\sc2rep\models\BuildModel::fromArray($buildArr, "sc2rep match {$match->id}");
 ?>
 <h3><?=$perf->player->name?></h3>
 <div id="advtabs_<?=$perf->sid?>" class="tabs">
@@ -39,9 +39,9 @@
 						<td><?=$stats["killed"]?></td>
 						<td><?=$stats["maxKills"]?></td>
 						<td><?=$stats["percentLost"]?> %</td>
-						<td><?=transformToTimestring($stats["avgLifetime"])?></td>
-						<td><?=transformToTimestring($stats["shortestLifeTime"])?></td>
-						<td><?=transformToTimestring($stats["longestLifeTime"])?></td>
+						<td><?=\holonet\common\readableDurationString($stats["avgLifetime"])?></td>
+						<td><?=\holonet\common\readableDurationString($stats["shortestLifeTime"])?></td>
+						<td><?=\holonet\common\readableDurationString($stats["longestLifeTime"])?></td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>
@@ -85,9 +85,10 @@
 					</label>
 				</div>
 			</div>
+			<!--
 			<div class="col-md-6">
 				<div class="input-group">
-					<input type="text" id="copyFrom" value="<?=htmlspecialchars($build->toSALT())?>"
+					<input type="text" id="copyFrom" value="<//htmlspecialchars($build->toSALT())"
 						class="form-control" placeholder="salt build">
 					<span class="btn btn-primary active input-group-addon copyButton"
 						help="<?=htmlspecialchars("<h4>Want to try this build on your own?</h4>")?>
@@ -99,6 +100,7 @@
 							only the first 3 supply buildings are included, and only the first 10 of any other unit are included.</i>")?>">Copy SALT encoding</span>
 				</div>
 			</div>
+			-->
 		</div>
 		<table class="table">
 			<thead>
@@ -133,9 +135,9 @@
 										<span>-</span>
 									<?php endif; ?>
 								</td>
-								<td><?=transformToTimestring($entry["started"])?></td>
-								<td><?=transformToTimestring($entry["spawned"])?></td>
-								<td><?=isset($entry["died"]) ? transformToTimestring($entry["died"]) : ""?></td>
+								<td><?=\holonet\common\readableDurationString($entry["started"])?></td>
+								<td><?=\holonet\common\readableDurationString($entry["spawned"])?></td>
+								<td><?=isset($entry["died"]) ? \holonet\common\readableDurationString($entry["died"]) : ""?></td>
 							</tr>
 						<?php endif; ?>
 					<?php endforeach; ?>

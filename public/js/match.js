@@ -46,7 +46,7 @@ $(function() {
 					if(ups[name] > 0) {
 						html += '<div class="upgrade_icons '+name.toLowerCase()+'"><span>'+ups[name]+'</span></div>';
 					} else {
-						html += '<div class="upgrade_icons '+name.toLowerCase()+'"><span></span></div>';						
+						html += '<div class="upgrade_icons '+name.toLowerCase()+'"><span></span></div>';
 					}
 				} else {
 					html += '<div class="upgrade_icons '+name.toLowerCase()+' washed_out"><span></span></div>';
@@ -102,7 +102,11 @@ function loadDetails() {
 	$("#detailsBtn").removeClass("glyphicon-menu-down").text("Loading...").addClass("loader");
 
 	$.ajax({
-		url: returnFWAlias()+'/loadData/'+$("#idMatch").val()+"/details.json",
+		url: returnFWAlias()+"matches/"+$("#idMatch").val()+"/details",
+		dataType: "json",
+		accepts: {
+			json: "application/json, text/javascript"
+		},
 		success: function(res) {
 			if(!res.error) {
 				data = JSON.parse(res.data);
@@ -189,13 +193,14 @@ function initChart(domObj, title, formatter) {
 function loadChartData(dom) {
 	var chart = dom.highcharts();
 	$.ajax({
-		url: returnFWAlias()+'/loadData/'+$("#idMatch").val()+'/'+dom.prop("id")+".json",
+		url: returnFWAlias()+"matches/"+$("#idMatch").val()+"/"+dom.prop("id"),
+		dataType: "json",
+		accepts: {
+			json: "application/json, text/javascript"
+		},
 		success: function(res) {
-			console.log(dom.prop("id")+": ");
 			$.each(JSON.parse(res.data), function(plId, data) {
 				chart.series[parseInt(plId)].setData(data, false);
-				console.log("\t"+data.length+" entries for "+plId);
-				console.log(data);
 			});
 
 			chart.hideLoading();

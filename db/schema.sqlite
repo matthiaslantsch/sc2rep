@@ -20,16 +20,7 @@ CREATE TABLE "match" (
   "played" timestamp NOT NULL,
   "length" integer NOT NULL,
   "idStatus" integer NOT NULL,
-  "idPlayer" integer NOT NULL,
-  "pickRace" integer NOT NULL,
-  "playRace" integer NOT NULL,
-  "league" integer,
-  FOREIGN KEY ("idStatus") REFERENCES "status"("idStatus"),
-  FOREIGN KEY ("idMatch") REFERENCES "match"("idMatch"),
-  FOREIGN KEY ("idPlayer") REFERENCES "player"("idPlayer"),
-  FOREIGN KEY ("pickRace") REFERENCES "race"("idTag"),
-  FOREIGN KEY ("playRace") REFERENCES "race"("idTag"),
-  FOREIGN KEY ("league") REFERENCES "tag"("idTag")
+  FOREIGN KEY ("idStatus") REFERENCES "status"("idStatus")
 )
 
 CREATE TABLE "player" (
@@ -75,7 +66,7 @@ CREATE TABLE "season" (
 
 CREATE TABLE "performance" (
   -- performance_1460100317
-  "idTag" integer NOT NULL,
+  "idPerformance" integer NOT NULL PRIMARY KEY,
   "RCR" integer,
   "SQ" integer,
   "AU" integer,
@@ -95,14 +86,11 @@ CREATE TABLE "performance" (
   "globalRank" varchar(20),
   "points" integer,
   "winrate" integer,
-  "number" integer NOT NULL,
   "idMatch" integer NOT NULL,
   "idPlayer" integer NOT NULL,
   "pickRace" integer NOT NULL,
   "playRace" integer NOT NULL,
   "league" integer,
-  CONSTRAINT "pkey_performance" PRIMARY KEY ("idTag"),
-  FOREIGN KEY ("idTag") REFERENCES "tag"("idTag"),
   FOREIGN KEY ("idMatch") REFERENCES "match"("idMatch"),
   FOREIGN KEY ("idPlayer") REFERENCES "player"("idPlayer"),
   FOREIGN KEY ("pickRace") REFERENCES "race"("idTag"),

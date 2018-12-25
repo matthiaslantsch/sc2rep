@@ -102,7 +102,7 @@ class PlayerModel extends ModelBase {
 		//because of the new bnet page, the old crawler doesn't work atm
 		//we're just using the latest 1v1 rating from rankedftw
 		$rankings = RankedFTWMiner::getRanking("?mode=1v1&player={$this->url}");
-		if($rankings !== false) {
+		if($rankings !== null) {
 			$this->curLeague = array_shift($rankings);
 		}
 		return;

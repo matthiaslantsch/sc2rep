@@ -44,7 +44,7 @@ class RankedFTWMiner {
 	 * @access public
 	 * @param  string $teamUrl A get url parameter string with the mode and the players in it
 	 * @param  integer $timestamp A timestamp for when the ranking is searched for
-	 * @return array with player ranking: ["league", "globalRank", "serverRank", "leagueRank"] or false on not found
+	 * @return array with player ranking: ["league", "globalRank", "serverRank", "leagueRank"] or null on not found
 	 */
 	public static function getRanking($teamUrl, $timestamp = null) {
 		if($timestamp === null) {
@@ -52,8 +52,8 @@ class RankedFTWMiner {
 		}
 
 		$teamId = self::getTeamId($teamUrl);
-		if($teamId === false) {
-			return false;
+		if($teamId === null) {
+			return null;
 		}
 
 		$rankings = self::loadRankings($teamId);
@@ -70,11 +70,11 @@ class RankedFTWMiner {
 		reset($rankings); // move the internal pointer to the start of the array
 		if(key($rankings) > $timestamp) {
 			//no dataset that old is avaible
-			return false;
+			return null;
 		}
 
 		//iterate over the array to find the closest match
-		$last = false;
+		$last = null;
 		foreach ($rankings as $ts => $rank) {
 			if($ts < $timestamp) {
 				$last = $rank;
@@ -86,7 +86,7 @@ class RankedFTWMiner {
 		}
 
 		//failsave, should never get here anyway
-		return false;
+		return null;
 	}
 
 	/**
@@ -126,6 +126,10 @@ class RankedFTWMiner {
 		}
 
 		$answer = json_decode($response, true);
+		if($answer === null) {
+			return array();
+		}
+
 		$ret = [];
 		foreach ($answer as $oldRanking) {
 			$ret[$oldRanking["data_time"]] = [

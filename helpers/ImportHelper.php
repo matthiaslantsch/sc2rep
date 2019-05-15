@@ -236,7 +236,6 @@ class ImportHelper {
 						$perf->__set($key, $val);
 					}
 				}
-
 			}
 
 			$player->save();

@@ -104,6 +104,7 @@ class RankedFTWMiner {
 		}
 
 		$answer = json_decode($response, true);
+
 		if(isset($answer["team_id"])) {
 			return $answer["team_id"];
 		} else {
@@ -120,7 +121,7 @@ class RankedFTWMiner {
 	 * @return array with rankings for that team, ordered by timestamp
 	 */
 	private static function loadRankings($teamId) {
-		$response = HttpGetter::request("http://rankedftw.com/team/".$teamId."/rankings", null);
+		$response = HttpGetter::request("http://rankedftw.com/team/".$teamId."/rankings/", null);
 		if($response === false) {
 			return [];
 		}

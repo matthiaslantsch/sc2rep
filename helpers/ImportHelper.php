@@ -167,7 +167,8 @@ class ImportHelper {
 			throw new ParseException("error saving the match details [1]", 400);
 		}
 
-		if($this->data["ladder"]) {
+		//if it's a custom 1v1 just lookup the rank anyway
+		if($this->data["ladder"] || $this->data["tags"]["gametype"] == "1v1") {
 			//try to get the rank for the match at that time for a full team
 			foreach ($this->data["teams"] as $team) {
 				$ranking = RankedFTWMiner::getRanking($team["fullRanked"], $this->data["timestamp"]);
@@ -177,7 +178,6 @@ class ImportHelper {
 					}
 				}
 			}
-
 		}
 
 		foreach($this->data["players"] as $pl) {

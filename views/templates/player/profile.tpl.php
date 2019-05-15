@@ -6,7 +6,7 @@
           <div class="media-left media-top">
             <a href="<?=linkTo("player/{$player->id}")?>">
               <div class="portrait_border"
-                style="background: url('http://eu.battle.net/sc2/static/images/profile/portrait-summary-<?=strtolower($player->currentLeague)?>.png')
+                style="background: url('<?=linkTo("gfx/portrait-summary-".strtolower($player->currentLeague).".png")?>')
                   no-repeat 50% 50%;">
                 <img src="<?=linkTo("gfx/unknown_portrait.jpg")?>" alt="portrait">
               </div>

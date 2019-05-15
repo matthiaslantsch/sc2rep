@@ -13,6 +13,7 @@
 namespace holonet\sc2rep\helpers;
 
 use DOMDocument;
+use DOMXPath;
 use holonet\common as co;
 use holonet\sc2rep\models\MapModel;
 use holonet\common\error\BadEnvironmentException;
@@ -190,16 +191,14 @@ class MapHelper {
 
 		$dom = new DOMDocument();
 		$dom->loadHTML($response, LIBXML_NOWARNING | LIBXML_NOERROR);
-		$images = $dom->getElementsByTagName('img');
-
-		foreach ($images as $image) {
-			if(strpos($image->getAttribute('src'), "Map") !== false) {
-				$imgUrl = "https://liquipedia.net/{$image->getAttribute('src')}";
-
-				$image = HttpGetter::request($imgUrl, null);
-				if($image !== false) {
-					file_put_contents($this->map->minimapPath(), $image);
-				}
+		$xpath = new DOMXPath($dom);
+		$nodelist = $xpath->query('//a[contains(@href, "/starcraft2/File:")]/img');
+		if($nodelist->length > 0) {
+			$node = $nodelist->item(0);
+			$imgUrl = "https://liquipedia.net/{$node->getAttribute('src')}";
+			$image = HttpGetter::request($imgUrl, null);
+			if($image !== false) {
+				file_put_contents($this->map->minimapPath(), $image);
 			}
 		}
 	}

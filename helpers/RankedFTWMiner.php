@@ -52,7 +52,7 @@ class RankedFTWMiner {
 		}
 
 		$teamId = self::getTeamId($teamUrl);
-		if($teamId === null) {
+		if($teamId === false) {
 			return null;
 		}
 
@@ -94,7 +94,7 @@ class RankedFTWMiner {
 	 * team being e.g. 1v1, archon, team-2v2, random-2v2 usw...
 	 *
 	 * @access private
-	 * @param  string $mode String for the gamemode (1v1, 2v2, usw...)
+	 * @param  string $teamUrl String for the team url
 	 * @return integer team_id/boolean false returns either the found team_id or false on not found
 	 */
 	private static function getTeamId($teamUrl) {

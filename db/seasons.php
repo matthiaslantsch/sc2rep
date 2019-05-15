@@ -282,8 +282,26 @@ SeasonModel::create(array(
 ), true);
 
 SeasonModel::create(array(
-	"name" => "2018 Season 3",
+	"name" => "2018 Season 4",
 	"group" => "season",
 	"number" => 38,
-	"start" => date("Y-m-d H:i:s", strtotime("20 Nov 2018"))
+	"start" => date("Y-m-d H:i:s", strtotime("20 Nov 2018")),
+	"lock" => date("Y-m-d H:i:s", strtotime("16 Jan 2019")),
+	"end" => date("Y-m-d H:i:s", strtotime("22 Jan 2019")),
+), true);
+
+SeasonModel::create(array(
+	"name" => "2019 Season 1",
+	"group" => "season",
+	"number" => 39,
+	"start" => date("Y-m-d H:i:s", strtotime("22 Jan 2019")),
+	"lock" => date("Y-m-d H:i:s", strtotime("15 May 2019")),
+	"end" => date("Y-m-d H:i:s", strtotime("22 May 2019")),
+), true);
+
+SeasonModel::create(array(
+	"name" => "2019 Season 2",
+	"group" => "season",
+	"number" => 40,
+	"start" => date("Y-m-d H:i:s", strtotime("22 Jan 2019"))
 ), true);

@@ -12,6 +12,7 @@
 
 namespace holonet\sc2rep\helpers;
 
+use DOMDocument;
 use holonet\common as co;
 use holonet\sc2rep\models\MapModel;
 use holonet\common\error\BadEnvironmentException;
@@ -84,7 +85,6 @@ class MapHelper {
 		if($this->map->denied !== true) {
 			$json = exec(co\registry('pythonExe').' '.co\registry('app.path')."/lib/map.py {$this->temps2ma} 2>&1", $out, $retcode);
 			if($retcode != 0) {
-				die(var_dump($out));
 				$this->map->denied = true;
 			} else {
 				$det = json_decode($json, true);
@@ -92,7 +92,7 @@ class MapHelper {
 				if($det["denied"]) {
 					$this->map->denied = true;
 				} else {
-					$this->map->tag->name = $det["name"];
+					$this->map->name = $det["name"];
 					$this->map->sizeX = $det["mapX"];
 					$this->map->sizeY = $det["mapY"];
 
@@ -108,7 +108,6 @@ class MapHelper {
 		}
 
 		//unlink($this->temps2ma);
-		$this->map->tag->save();
 		$this->map->save();
 	}
 
@@ -181,26 +180,26 @@ class MapHelper {
 	 * @return void
 	 */
 	private function minimapFromTl() {
-		$tlUrl = "http://wiki.teamliquid.net/starcraft2/".str_replace(' ', '_', $this->map->tag->name);
+		$tlUrl = "https://liquipedia.net/starcraft2/".str_replace(' ', '_', $this->map->name);
 
 		$response = HttpGetter::request($tlUrl);
+
 		if($response === false) {
 			return;
 		}
 
-		$simpleXml = simplexml_load_string($response);
+		$dom = new DOMDocument();
+		$dom->loadHTML($response, LIBXML_NOWARNING | LIBXML_NOERROR);
+		$images = $dom->getElementsByTagName('img');
 
-		if($simpleXml === false) {
-			return;
-		}
+		foreach ($images as $image) {
+			if(strpos($image->getAttribute('src'), "Map") !== false) {
+				$imgUrl = "https://liquipedia.net/{$image->getAttribute('src')}";
 
-		$imgTag = $simpleXml->xpath("//*[@class='image']/img");
-		if(isset($imgTag[0])) {
-			$imgUrl = $imgTag[0]->attributes()->src;
-
-			$image = HttpGetter::request($imgUrl, null);
-			if($image !== false) {
-				file_put_contents($this->map->minimapPath(), $image);
+				$image = HttpGetter::request($imgUrl, null);
+				if($image !== false) {
+					file_put_contents($this->map->minimapPath(), $image);
+				}
 			}
 		}
 	}

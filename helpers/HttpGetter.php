@@ -45,8 +45,7 @@ class HttpGetter {
 		}
 
 		$cxContext = stream_context_create($aContext);
-
-		$response = @file_get_contents($url, false, $cxContext);
+		$response = file_get_contents($url, false, $cxContext);
 
 		//check the response code
 		if($expectedCode !== null && (!isset($http_response_header[0]) || strpos($http_response_header[0], $expectedCode) === false)) {
